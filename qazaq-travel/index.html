@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кейс Qazaq Travel · Дана Орынбетова</title>
+<meta name="description" content="Qazaq Travel: бронирование жилья и впечатлений по Казахстану. Кейс UX/UI-дизайнера Даны Орынбетовой.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout idea: a calm neutral canvas built from bento plates. Screens sit on grey stages. Qazaq Travel red marks accents; yellow appears next to Dana's name. */
+  --bg: #F3F3F5;
+  --card: #FFFFFF;
+  --stage: #E9E9EE;
+  --ink: #131317;
+  --ink-soft: #2B2B32;
+  --muted: #6D6D78;
+  --line: #E2E2E8;
+  --accent: #DCA100; /* Qazaq Travel yellow, next to Dana's name */
+  --yellow: #E64A34; /* Qazaq Travel red accent */
+  --display: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --body: "Onest", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  /* type scale */
+  --t-hero: clamp(64px, 10.5vw, 148px);
+  --t-num: clamp(56px, 7.4vw, 108px);
+  --t-h2: clamp(32px, 4.6vw, 60px);
+  --t-quote: clamp(30px, 3.9vw, 50px);
+  --t-h3: clamp(20px, 1.7vw, 24px);
+  --t-lead: clamp(18px, 1.6vw, 21px);
+  --t-body: 16.5px;
+  --t-small: 14.5px;
+
+  --wrap: 1200px;
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --r-lg: 28px;
+  --r-md: 22px;
+  --gap: 12px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t-body)/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--display); font-weight: 600; letter-spacing: -.03em; }
+h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -.02em; }
+p { margin: 0; }
+html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.label { font: 500 12.5px/1.4 var(--mono); letter-spacing: 0; color: var(--muted); }
+/* section overlines stay in caps */
+.head .label, .label.sec { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+.label.row { display: flex; align-items: center; gap: 10px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); flex: none; }
+.dot.name { background: var(--accent); }
+.dot.grey { background: #C4C4CE; }
+.muted { color: var(--muted); }
+
+/* header */
+.top { position: sticky; top: 0; z-index: 30; background: rgb(243 243 245 / .78); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid rgb(19 19 23 / .06); }
+.top-in { max-width: var(--wrap); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.me { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1 var(--body); text-decoration: none; }
+.nav { display: flex; gap: 4px; }
+.nav button { border: 0; background: transparent; padding: 8px 12px; border-radius: 999px; font: 500 14px/1 var(--body); color: var(--muted); cursor: pointer; }
+.nav button:hover { color: var(--ink); background: rgb(19 19 23 / .05); }
+.lang { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+.lang button { border: 0; background: transparent; padding: 8px 14px; border-radius: 999px; font: 500 13px/1 var(--mono); letter-spacing: .05em; color: var(--muted); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+
+/* hero */
+.hero { padding: clamp(36px, 6vw, 72px) 0 0; }
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 28px; align-items: center; }
+.hero-text { grid-column: 1 / span 6; padding-right: clamp(0px, 2vw, 28px); }
+.hero-stage { grid-column: 7 / span 6; }
+.crumbs { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font: 500 14px/1 var(--body); color: var(--muted); }
+.crumbs a { text-decoration: none; color: var(--muted); }
+.crumbs a:hover { color: var(--ink); }
+.crumbs .sep { opacity: .5; }
+.crumbs [aria-current] { color: var(--ink); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 13px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font: 500 14px/1 var(--body); }
+.hero h1 { font-size: var(--t-hero); line-height: .9; letter-spacing: -.055em; margin: 22px 0; }
+.hero h1 i { font-style: normal; color: var(--yellow); }
+.lead { font-size: var(--t-lead); line-height: 1.5; max-width: 30em; color: var(--ink-soft); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; text-decoration: none; font: 500 15px/1 var(--body); border: 1px solid var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.btn.solid { background: var(--ink); color: #fff; }
+.btn.ghost { background: transparent; }
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--ink); color: #fff; }
+.btn .arr { font-family: var(--mono); font-size: 13px; opacity: .7; }
+.btn small { font: 400 12px/1 var(--mono); opacity: .6; }
+
+.stage { background: var(--stage); border-radius: var(--r-lg); padding: clamp(18px, 2.4vw, 28px); display: grid; place-items: center; }
+.hero-stage { padding: clamp(22px, 3vw, 36px) clamp(22px, 3vw, 36px) 20px; gap: 16px; }
+.phone { --ph: min(600px, 70vh); position: relative; width: min(100%, 290px); height: var(--ph); border-radius: 30px; overflow: hidden; background: var(--card); box-shadow: 0 30px 60px -30px rgb(19 19 23 / .35), 0 0 0 1px rgb(19 19 23 / .06); }
+.phone img { width: 100%; animation: feed 34s linear infinite; }
+.phone:hover img { animation-play-state: paused; }
+@keyframes feed {
+  0% { transform: translateY(0); opacity: 0; }
+  2% { transform: translateY(0); opacity: 1; }
+  6% { transform: translateY(0); }
+  93% { transform: translateY(calc(-100% + var(--ph))); opacity: 1; }
+  98% { transform: translateY(calc(-100% + var(--ph))); opacity: 1; }
+  100% { transform: translateY(calc(-100% + var(--ph))); opacity: 0; }
+}
+.cap { text-align: center; font: 400 12.5px/1.45 var(--mono); color: var(--muted); }
+
+/* bento */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
+.tile { background: var(--card); border-radius: var(--r-md); padding: 24px 26px; display: grid; gap: 12px; align-content: start; min-width: 0; border: 1px solid rgb(19 19 23 / .04); }
+.tile .val { font: 500 21px/1.3 var(--display); letter-spacing: -.02em; }
+.tile.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.tile.dark .label { color: rgb(255 255 255 / .55); }
+.tile p { font-size: var(--t-small); line-height: 1.55; color: var(--muted); }
+.tile.dark p { color: rgb(255 255 255 / .72); }
+.s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
+
+/* metrics */
+.metrics { display: flex; flex-wrap: wrap; align-items: flex-end; column-gap: var(--mgap); row-gap: 18px; --mgap: clamp(28px, 4vw, 56px); }
+.metric { padding-left: var(--mgap); border-left: 1px solid rgb(255 255 255 / .14); }
+.metric:first-child { padding-left: 0; border-left: 0; }
+.metric b { display: flex; align-items: baseline; gap: .12em; font: 600 var(--t-num)/.95 var(--display); letter-spacing: -.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.metric b small { font-size: .36em; letter-spacing: -.02em; font-weight: 500; opacity: .75; }
+.metric > span { display: block; margin-top: 14px; font-size: 15px; opacity: .7; }
+.metrics.light .metric { border-left-color: var(--line); }
+.metrics.light .metric b { font-size: clamp(44px, 6.4vw, 92px); }
+/* chips */
+.roles { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; background: var(--bg); font: 500 16px/1 var(--body); white-space: nowrap; }
+
+/* sections */
+section.block { padding: clamp(72px, 9vw, 128px) 0 0; scroll-margin-top: 70px; }
+.head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 14px; align-items: start; margin-bottom: clamp(24px, 3.5vw, 44px); }
+.head > .label { grid-column: 1 / span 6; }
+.head > :last-child { grid-column: 7 / span 6; }
+.head .label { display: flex; align-items: center; gap: 10px; padding-top: clamp(8px, 1.4vw, 20px); }
+.head h2 { font-size: var(--t-h2); line-height: 1.02; }
+.head p { margin-top: 18px; font-size: 17px; color: var(--ink-soft); }
+
+/* lists */
+.list { list-style: none; margin: 0; padding: 0; display: grid; }
+.list li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: baseline; padding: 15px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.45; }
+.list li:first-child { border-top: 0; }
+.tile.dark .list li { border-color: rgb(255 255 255 / .1); }
+
+/* research */
+.num { font: 500 12px/1 var(--mono); color: var(--muted); }
+.tile.dark p.quote { font: 600 var(--t-h3)/1.25 var(--display); letter-spacing: -.02em; max-width: 30em; color: #fff; }
+.insight { padding: clamp(30px, 4.4vw, 56px); gap: 24px; }
+
+/* swimlane */
+.flow { padding: clamp(20px, 2.4vw, 28px); gap: 18px; }
+.flow-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.facts { display: flex; gap: 8px; flex-wrap: wrap; }
+.fact { padding: 9px 14px; border-radius: 999px; background: var(--bg); font: 500 14px/1 var(--body); }
+.fact b { font-weight: 600; }
+.lanes-wrap { overflow-x: auto; overflow-y: hidden; margin: -14px -10px; padding: 14px 10px; }
+.lanes { position: relative; display: grid; grid-template-columns: 44px repeat(4, minmax(0, 1fr)); grid-template-rows: auto repeat(7, auto); column-gap: 10px; row-gap: 22px; min-width: 720px; }
+.lane-bg { grid-row: 1 / -1; border-radius: 18px; margin: -10px -5px; }
+.lane-bg.alt { background: var(--bg); }
+.lane-name { grid-row: 1; display: flex; align-items: center; gap: 10px; padding: 4px 6px 6px; font: 500 15px/1.25 var(--body); z-index: 1; }
+.lane-name .ico { width: 30px; height: 30px; border-radius: 10px; background: var(--card); box-shadow: 0 0 0 1px var(--line); display: grid; place-items: center; font: 500 11px/1 var(--mono); color: var(--muted); flex: none; }
+.row-num { grid-column: 1; align-self: center; font: 500 11.5px/1 var(--mono); color: var(--muted); z-index: 1; }
+.stepc { align-self: center; z-index: 2; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 0 0 1px var(--line), 0 10px 24px -18px rgb(19 19 23 / .4); display: grid; gap: 4px; transition: transform .2s ease, box-shadow .2s ease; }
+.stepc:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--ink), 0 14px 28px -18px rgb(19 19 23 / .45); }
+.stepc .n { display: flex; align-items: center; gap: 8px; font: 500 12px/1.2 var(--mono); color: var(--muted); }
+.stepc b { font: 600 16px/1.25 var(--body); }
+.stepc span.d { font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+.stepc.final { background: var(--ink); box-shadow: none; }
+.stepc.final b, .stepc.final .d, .stepc.final .n { color: #fff; }
+
+.who-tag { display: none; justify-self: start; margin-bottom: 4px; padding: 4px 8px; border-radius: 6px; background: var(--bg); font: 500 11px/1 var(--mono); color: var(--muted); }
+.stepc.final .who-tag { background: rgb(255 255 255 / .12); color: rgb(255 255 255 / .7); }
+.flowsvg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
+.flowsvg path { fill: none; stroke: #B4B4BF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5 6; animation: dash 1.4s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -22; } }
+.swipe-hint { display: none; font: 500 12.5px/1 var(--mono); color: var(--muted); }
+.flow-note { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+
+/* galleries */
+.gallery-wrap { position: relative; margin-top: var(--gap); }
+.gallery-bar { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin: clamp(28px, 3.5vw, 44px) 0 16px; }
+.gallery-bar .gt { display: grid; gap: 6px; }
+.arrows { display: flex; gap: 8px; }
+.arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; font: 400 16px/1 var(--mono); transition: background .2s, color .2s, opacity .2s; }
+.arrow:hover:not(:disabled) { background: var(--ink); color: #fff; border-color: var(--ink); }
+.arrow:disabled { opacity: .35; cursor: default; }
+.gallery { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * var(--gap)) / 4); gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 6px; scrollbar-width: none; }
+.gallery::-webkit-scrollbar { display: none; }
+.screen { margin: 0; display: grid; gap: 14px; align-content: start; scroll-snap-align: start; }
+.screen .stage { padding: 20px 18px; }
+.screen figcaption { text-align: center; font-size: var(--t-small); line-height: 1.45; color: var(--muted); padding: 0 8px; }
+.screen figcaption b { color: var(--ink); font-weight: 500; }
+.device { width: 100%; max-width: 260px; margin: 0 auto; }
+.device.scroll { position: relative; aspect-ratio: 414 / 896; overflow-y: auto; border-radius: 26px; background: var(--card); scrollbar-width: thin; scrollbar-color: rgb(19 19 23 / .25) transparent; overscroll-behavior: contain; }
+.scroll-box { position: relative; width: 100%; max-width: 260px; margin: 0 auto; }
+.hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 6px 10px; border-radius: 999px; background: rgb(19 19 23 / .82); color: #fff; font: 500 11px/1 var(--mono); letter-spacing: .04em; pointer-events: none; transition: opacity .3s; white-space: nowrap; }
+.scroll-box.scrolled .hint { opacity: 0; }
+
+/* compare */
+.compare-card { background: var(--stage); border-color: transparent; padding: 30px 22px 26px; gap: 18px; }
+.compare { position: relative; width: 100%; max-width: 300px; margin: 0 auto; --pos: 50%; user-select: none; }
+.compare .viewport { aspect-ratio: 414 / 896; overflow: hidden; border-radius: 30px; background: var(--card); }
+.compare .layers { position: relative; }
+.compare .after { position: absolute; inset: 0 0 auto 0; width: 100%; clip-path: inset(0 0 0 var(--pos)); }
+.compare .divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--ink); pointer-events: none; }
+.compare .knob { position: absolute; top: 50%; left: var(--pos); transform: translate(-50%, -50%); width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: #fff; border: 3px solid #fff; box-shadow: 0 6px 16px rgb(19 19 23 / .3); cursor: ew-resize; display: grid; place-items: center; font: 500 12px/1 var(--mono); touch-action: none; }
+.compare .tag { position: absolute; top: 12px; padding: 6px 10px; border-radius: 999px; font: 500 12px/1 var(--mono); pointer-events: none; }
+.compare .tag.b { left: 12px; background: rgb(255 255 255 / .94); color: var(--muted); box-shadow: 0 0 0 1px var(--line); }
+.compare .tag.a { right: 12px; background: var(--ink); color: #fff; }
+.compare-note { text-align: center; display: grid; gap: 8px; justify-items: center; padding: 0 10px; }
+.compare-note p { font-size: var(--t-small); line-height: 1.55; color: var(--muted); max-width: 32em; }
+
+/* ecosystem */
+.eco { padding: clamp(22px, 2.6vw, 32px); gap: 18px; }
+.tools { display: grid; gap: 10px; position: relative; }
+.toolc { display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 16px; border-radius: 16px; background: var(--bg); }
+.toolc .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--card); display: grid; place-items: center; font: 600 15px/1 var(--display); box-shadow: 0 0 0 1px var(--line); }
+.toolc b { display: block; font: 600 17px/1.2 var(--display); letter-spacing: -.02em; }
+.toolc span { display: block; font-size: 13.5px; line-height: 1.4; color: var(--muted); margin-top: 3px; }
+.toolc .tag { font: 500 11px/1 var(--mono); letter-spacing: 0; padding: 4px 7px; border-radius: 6px; background: var(--card); color: var(--muted); box-shadow: 0 0 0 1px var(--line); white-space: nowrap; align-self: start; }
+.toolc.ext { background: transparent; box-shadow: inset 0 0 0 1px #D5D5DD; }
+.switch { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--muted); padding-top: 4px; }
+.switch i { font-style: normal; font-family: var(--mono); color: var(--ink); }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr); align-items: stretch; }
+.big { border-radius: 18px; padding: 18px; display: grid; gap: 12px; align-content: start; }
+.big.app { background: var(--ink); color: #fff; }
+.big.sales { background: var(--bg); }
+.big .head2 { display: flex; align-items: center; gap: 12px; }
+.big .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font: 600 15px/1 var(--display); }
+.big.app .ic { background: rgb(255 255 255 / .1); }
+.big.sales .ic { background: var(--yellow); color: var(--ink); }
+.big b { font: 600 20px/1.15 var(--display); letter-spacing: -.02em; }
+.big small { display: block; font-size: 13px; opacity: .65; margin-top: 3px; }
+.big ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.big li { padding: 9px 0; border-top: 1px solid rgb(19 19 23 / .08); font-size: 13.5px; line-height: 1.4; }
+.big.app li { border-top-color: rgb(255 255 255 / .1); }
+.big li:first-child { border-top: 0; }
+.wire { position: relative; display: grid; align-content: center; justify-items: center; gap: 8px; }
+.wire::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: repeating-linear-gradient(90deg, #B4B4BF 0 6px, transparent 6px 12px); background-size: 24px 2px; animation: wire 1.2s linear infinite; }
+@keyframes wire { to { background-position: 24px 0; } }
+.wire span { position: relative; z-index: 1; padding: 5px 8px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: 500 11.5px/1 var(--mono); white-space: nowrap; }
+
+/* features */
+.feat { list-style: none; margin: 0; padding: 0; display: grid; }
+.feat li { padding: 13px 0; border-top: 1px solid var(--line); font-size: 15.5px; display: flex; gap: 12px; align-items: baseline; }
+.feat li:first-child { border-top: 0; }
+
+/* growth */
+.grow { display: grid; gap: 16px; align-content: start; }
+.grow .stage { padding: 22px 18px; }
+.grow .txt { text-align: center; display: grid; gap: 6px; padding: 0 10px; }
+.grow p { font-size: var(--t-small); line-height: 1.5; color: var(--muted); }
+
+/* visuals */
+.visual { border-radius: var(--r-md); overflow: hidden; background: var(--card); padding: 12px; }
+.visual img { width: 100%; border-radius: 14px; }
+
+/* chart */
+.chart-card { padding: clamp(20px, 2.6vw, 32px); gap: 20px; }
+.chart-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.chart-top h3 { font-size: var(--t-h3); }
+.legend { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+.legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--ink); }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart .grid line { stroke: var(--line); stroke-width: 1; }
+.chart .axis text { fill: var(--muted); font: 400 11px var(--mono); }
+.chart .bar { fill: var(--ink); }
+.chart .bar.peak-bar { fill: var(--yellow); }
+.chart .hit { fill: transparent; cursor: pointer; }
+.chart .peak text { fill: var(--ink); font: 600 13px var(--body); }
+.chart .peak line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; }
+.tip { position: absolute; pointer-events: none; transform: translate(-50%, calc(-100% - 10px)); background: var(--ink); color: #fff; padding: 8px 10px; border-radius: 10px; font: 500 12.5px/1.3 var(--body); white-space: nowrap; opacity: 0; transition: opacity .15s; }
+.tip small { display: block; font: 400 11px/1.3 var(--mono); opacity: .65; }
+.tip.on { opacity: 1; }
+details.table { font-size: 14px; color: var(--muted); }
+details.table summary { cursor: pointer; font: 500 12.5px/1.4 var(--mono); }
+details.table table { margin-top: 12px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+details.table td, details.table th { padding: 4px 14px 4px 0; text-align: left; font-size: 13px; }
+
+/* team */
+.member { gap: 10px; }
+.member.lead-card { padding: clamp(24px, 3vw, 34px); }
+.member.lead-card h3 { font-size: clamp(26px, 2.6vw, 34px); }
+.member .role { font: 500 12.5px/1.4 var(--mono); color: var(--muted); }
+
+/* contact */
+.contact { padding: clamp(80px, 10vw, 140px) 0 40px; scroll-margin-top: 70px; }
+.contact h2 { font-size: clamp(40px, 7vw, 96px); line-height: .95; letter-spacing: -.05em; margin-top: 18px; }
+.contact h2 i { font-style: normal; color: var(--accent); }
+footer .who { display: inline-flex; align-items: center; gap: 8px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+footer { padding: 28px 0 44px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 400 12.5px/1.5 var(--mono); color: var(--muted); }
+footer .wrap > span { padding-top: 22px; }
+footer .line { border-top: 1px solid var(--line); }
+
+/* responsive */
+@media (max-width: 1040px) {
+  .nav { display: none; }
+  .gallery { grid-auto-columns: calc((100% - 2 * var(--gap)) / 2.4); }
+  .pair { grid-template-columns: 1fr; gap: 10px; }
+  .wire { min-height: 56px; }
+  .wire::before { left: 50%; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: repeating-linear-gradient(180deg, #B4B4BF 0 6px, transparent 6px 12px); background-size: 2px 24px; animation: wire-v 1.2s linear infinite; }
+  @keyframes wire-v { to { background-position: 0 24px; } }
+  .wire { grid-auto-flow: column; }
+}
+@media (max-width: 860px) {
+  .head > .label, .head > :last-child { grid-column: 1 / -1; }
+  .s3, .s4, .s5, .s6, .s7, .s8 { grid-column: span 6; }
+  .wide-m { grid-column: span 12; }
+}
+@media (max-width: 760px) {
+  .hero-text, .hero-stage { grid-column: 1 / -1; }
+  .hero-stage { max-width: 420px; width: 100%; justify-self: center; }
+}
+@media (max-width: 700px) {
+  .lanes-wrap { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; margin: 0 -22px; padding: 4px 22px 8px; scroll-padding: 0 22px; scrollbar-width: none; }
+  .lanes-wrap::-webkit-scrollbar { display: none; }
+  .lanes { display: flex; gap: 10px; min-width: 0; }
+  .lane-bg, .lane-name, .row-num, .flowsvg { display: none; }
+  .stepc { flex: 0 0 72%; scroll-snap-align: start; align-self: stretch; }
+  .who-tag { display: inline-flex; }
+  .swipe-hint { display: inline-flex !important; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .s3, .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; }
+  .metrics { flex-direction: column; align-items: stretch; row-gap: 0; }
+  .metric, .metric:first-child { padding: 16px 0; border-left: 0; border-top: 1px solid rgb(255 255 255 / .14); }
+  .metric:first-child { border-top: 0; padding-top: 4px; }
+  .metrics.light .metric { border-top-color: var(--line); }
+  .fact-t { grid-column: span 6; padding: 18px; }
+  .swipe { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--gap); margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 2px var(--gutter) 8px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe > * { flex: 0 0 84%; scroll-snap-align: start; }
+  .swipe > .visual { flex-basis: 88%; }
+  .visual.strip { overflow-x: auto; scrollbar-width: none; }
+  .visual.strip::-webkit-scrollbar { display: none; }
+  .visual.strip img { width: 720px; max-width: none; }
+  .swipe .pair { grid-template-columns: 1fr; gap: 10px; }
+  .toolc { grid-template-columns: 40px 1fr; gap: 12px; padding: 14px; }
+  .toolc .ic { width: 40px; height: 40px; }
+  .toolc .tag { grid-column: 2; justify-self: start; margin-top: -4px; }
+  .member:not(.lead-card) h3 { font-size: 17px; hyphens: none; }
+  .member:not(.lead-card) { padding: 18px; }
+  .fact-t .val { font-size: 17px; }
+  .chip { font-size: 14.5px; padding: 10px 14px; }
+  .gallery { grid-auto-columns: 78%; }
+  .lang button { padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone { overflow-y: auto; }
+  .phone img, .flowsvg path, .wire::before { animation: none; }
+  .gallery { scroll-behavior: auto; }
+  .btn, .stepc { transition: none; }
+}
+
+/* qazaq extras */
+.metrics.four .metric b { font-size: clamp(40px, 5.4vw, 80px); }
+.paths { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
+.path { grid-column: span 6; display: grid; gap: 14px; align-content: start; }
+.path ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: p; }
+.path li { counter-increment: p; display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: baseline; padding: 13px 0; border-top: 1px solid var(--line); font-size: 15.5px; }
+.path li:first-child { border-top: 0; }
+.path li::before { content: counter(p, decimal-leading-zero); font: 500 12px/1 var(--mono); color: var(--muted); }
+.tile.dark .path li, .tile.dark.path li { border-color: rgb(255 255 255 / .1); }
+.tile.dark.path li::before { color: rgb(255 255 255 / .5); }
+.split { display: grid; gap: 14px; }
+@media (min-width: 601px) { .metrics.fill { flex-wrap: nowrap; } .metrics.fill .metric { flex: 1 1 0; min-width: 0; } }
+.splitbar { display: flex; height: 54px; border-radius: 14px; overflow: hidden; gap: 3px; }
+.splitbar span { display: flex; align-items: center; padding: 0 14px; font: 600 15px/1 var(--display); color: #fff; white-space: nowrap; }
+.splitbar .a { background: var(--ink); }
+.splitbar .b { background: #4A4A55; }
+.splitbar .c { background: var(--yellow); }
+.splitlegend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14.5px; color: var(--muted); }
+.splitlegend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; vertical-align: 0; }
+@media (max-width: 860px) { .path { grid-column: 1 / -1; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="me" href="#top"><span class="dot name"></span><span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></a>
+    <nav class="nav" aria-label="Разделы / Sections">
+      <button type="button" data-go="context"><span class="ru">Контекст</span><span class="en">Context</span></button>
+      <button type="button" data-go="research"><span class="ru">Исследование</span><span class="en">Research</span></button>
+      <button type="button" data-go="booking"><span class="ru">Решения</span><span class="en">Solutions</span></button>
+      <button type="button" data-go="results"><span class="ru">Результаты</span><span class="en">Results</span></button>
+      <button type="button" data-go="contact"><span class="ru">Контакты</span><span class="en">Contact</span></button>
+    </nav>
+    <div class="lang" role="group" aria-label="Язык / Language">
+      <button type="button" id="lang-ru" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <nav class="crumbs" aria-label="Breadcrumbs"><a href="../"><span class="ru">Все кейсы</span><span class="en">All case studies</span></a><span class="sep">/</span><span aria-current="page">Qazaq Travel</span></nav>
+          <span class="pill"><span class="dot"></span><span class="ru">Кейс · Бронирование и впечатления · Казахстан</span><span class="en">Case study · Stays and experiences · Kazakhstan</span></span>
+          <h1>Qazaq Travel<i>.</i></h1>
+          <p class="lead ru">Глэмпинги, домики, отели и активности по Казахстану в одном приложении. Билет открывается без интернета, а на входе его считывает турникет или контролёр.</p>
+          <p class="lead en">Glamping, cabins, hotels and activities across Kazakhstan in one app. The ticket opens offline, and at the entrance a turnstile or a controller reads it.</p>
+          <div class="actions">
+            <a class="btn solid" href="https://apps.apple.com/kz/app/qazaq-travel/id6753318943" target="_blank" rel="noopener">App Store <span class="arr">↗</span></a>
+            <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.kz.qazaqTravel" target="_blank" rel="noopener">Google Play <span class="arr">↗</span></a>
+          </div>
+        </div>
+        <div class="stage hero-stage">
+          <div class="phone">
+            <img src="img/category.webp" width="828" height="2428" data-alt-ru="Категория «Глэмпинг»: карточки мест с фото, ценой и вместимостью" data-alt-en="Glamping category: place cards with photos, price and capacity" alt="Категория «Глэмпинг»: карточки мест с фото, ценой и вместимостью">
+          </div>
+          <p class="cap"><span class="ru">Категория «Глэмпинг»</span><span class="en">Glamping category</span></p>
+        </div>
+      </div>
+
+      <div class="bento" style="margin-top: clamp(28px, 4vw, 48px)">
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Роль</span><span class="en">Role</span></span><span class="val"><span class="ru">UX/UI-дизайнер</span><span class="en">UX/UI designer</span></span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Срок</span><span class="en">Timeline</span></span><span class="val"><span class="ru">1,5 месяца</span><span class="en">1.5 months</span></span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Платформа</span><span class="en">Platform</span></span><span class="val">iOS, Android</span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">География</span><span class="en">Coverage</span></span><span class="val"><span class="ru">6 регионов Казахстана</span><span class="en">6 regions of Kazakhstan</span></span></div>
+
+        <div class="tile dark s12" style="padding: clamp(24px, 3vw, 36px)">
+          <span class="label row"><span class="dot"></span><span class="ru">Первый месяц · август–сентябрь</span><span class="en">First month · August–September</span></span>
+          <div class="metrics four" style="margin-top: 14px">
+            <div class="metric"><b>~300</b><span class="ru">операций за месяц</span><span class="en">transactions in a month</span></div>
+            <div class="metric"><b>~180</b><span class="ru">впечатлений</span><span class="en">experiences</span></div>
+            <div class="metric"><b>~80</b><span class="ru">бронирований жилья</span><span class="en">stay bookings</span></div>
+            <div class="metric"><b>~40</b><span class="ru">оплат парковки</span><span class="en">parking payments</span></div>
+          </div>
+        </div>
+
+        <div class="tile s12 roles">
+          <span class="label"><span class="ru">Регионы</span><span class="en">Regions</span></span>
+          <div class="chips">
+            <span class="chip"><span class="ru">Астана</span><span class="en">Astana</span></span><span class="chip"><span class="ru">Алматы</span><span class="en">Almaty</span></span><span class="chip"><span class="ru">Шымкент</span><span class="en">Shymkent</span></span><span class="chip"><span class="ru">Семей</span><span class="en">Semey</span></span><span class="chip"><span class="ru">Алматинская обл.</span><span class="en">Almaty region</span></span><span class="chip"><span class="ru">Акмолинская обл.</span><span class="en">Akmola region</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="context">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">01 <span class="dot"></span> <span class="ru">Контекст</span><span class="en">Context</span></span>
+        <div><h2><span class="ru">Отдых на природе, где нет связи</span><span class="en">Nature getaways with no signal</span></h2><p class="ru">Люди бронируют глэмпинги, домики и активности в другом городе, например в Бурабае, а приезжают туда, где интернет ловит не везде. Я собирала продукт с нуля: исследование, конкуренты, сценарии, пользовательский путь и интерфейс.</p><p class="en">People book glamping, cabins and activities in another city, say in Burabay, and arrive where the signal is patchy. I built the product from scratch: research, competitors, flows, the user journey and the UI.</p></div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s6">
+          <span class="label"><span class="ru">Задача</span><span class="en">Goal</span></span>
+          <ul class="list">
+            <li><span class="dot"></span><span><span class="ru">Легко забронировать жильё и активности, находясь в другом городе</span><span class="en">Book stays and activities easily from another city</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Предъявить билет на входе даже без сети</span><span class="en">Show the ticket at the entrance even with no signal</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Показать всё нужное коротко и понятно</span><span class="en">Show everything that matters, short and clear</span></span></li>
+          </ul>
+        </div>
+        <div class="tile dark s6">
+          <span class="label"><span class="ru">Ограничения</span><span class="en">Constraints</span></span>
+          <ul class="list">
+            <li><span class="dot"></span><span><span class="ru">На природе часто нет интернета</span><span class="en">Nature spots often have no internet</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Пожилые гости не пользуются приложением</span><span class="en">Older guests don't use the app</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Часть гостей платит наличными на месте</span><span class="en">Some guests pay cash on site</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Сезонность: зимой многие активности закрываются</span><span class="en">Seasonality: many activities close in winter</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="research">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">02 <span class="dot"></span> <span class="ru">Исследование</span><span class="en">Research</span></span>
+        <div><h2><span class="ru">Решения проверяли на месте</span><span class="en">Decisions were tested on site</span></h2></div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s3"><span class="num">01</span><h3><span class="ru">Конкуренты</span><span class="en">Competitors</span></h3><p class="ru">Разобрала сервисы бронирования жилья и активностей.</p><p class="en">I analyzed booking services for stays and activities.</p></div>
+        <div class="tile s3"><span class="num">02</span><h3><span class="ru">Опросы</span><span class="en">Surveys</span></h3><p class="ru">Опросы будущих гостей о том, как они ищут и бронируют отдых.</p><p class="en">Surveys of future guests about how they look for and book trips.</p></div>
+        <div class="tile s3"><span class="num">03</span><h3><span class="ru">Владельцы мест</span><span class="en">Venue owners</span></h3><p class="ru">Разговоры с основателями домиков и площадок о том, как они принимают гостей.</p><p class="en">Talks with cabin and venue owners about how they receive guests.</p></div>
+        <div class="tile s3"><span class="num">04</span><h3><span class="ru">Тестовый запуск</span><span class="en">Test launch</span></h3><p class="ru">Проблемы всплывали на месте, и дизайн меняли сразу.</p><p class="en">Problems surfaced on site, and the design changed right away.</p></div>
+      </div>
+      <div class="bento" style="margin-top: var(--gap)">
+        <div class="tile dark s12 insight">
+          <span class="label row"><span class="dot"></span><span class="ru">Главный инсайт</span><span class="en">Key insight</span></span>
+          <p class="quote"><span class="ru">Там, где природа, часто нет интернета.</span><span class="en">Where there's nature, there's often no internet.</span></p>
+          <p class="ru" style="max-width:46em;font-size:16.5px">Поэтому купленный билет хранится в приложении офлайн, а турникет считывает его без сети. Мы купили турникет и тестировали дизайн прямо на нём.</p>
+          <p class="en" style="max-width:46em;font-size:16.5px">So a purchased ticket is stored offline in the app, and the turnstile reads it without a connection. We bought a turnstile and tested the design right on it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="booking">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">03 <span class="dot"></span> <span class="ru">Бронирование</span><span class="en">Booking</span></span>
+        <div><h2><span class="ru">Найти и забронировать за пару минут</span><span class="en">Find and book in a couple of minutes</span></h2><p class="ru">Жильё и впечатления живут в одном приложении, но бронируются по-разному: жильё по датам и вместимости, впечатления по времени и количеству билетов.</p><p class="en">Stays and experiences live in one app but book differently: stays by dates and capacity, experiences by time slot and ticket count.</p></div>
+      </div>
+      <div class="gallery-wrap">
+        <div class="gallery-bar">
+          <div class="gt"><span class="label"><span class="ru">Экраны бронирования</span><span class="en">Booking screens</span></span><h3><span class="ru">От главной до билета</span><span class="en">From home to ticket</span></h3></div>
+          <div class="arrows">
+            <button class="arrow" type="button" data-dir="-1" aria-label="Назад / Back">←</button>
+            <button class="arrow" type="button" data-dir="1" aria-label="Вперёд / Next">→</button>
+          </div>
+        </div>
+        <div class="gallery">
+          <figure class="screen"><div class="stage"><img class="device" src="img/home.webp" width="828" height="1792" loading="lazy" data-alt-ru="Главная: проживание, категории и предложения" data-alt-en="Home: stays, categories and offers" alt="Главная: проживание, категории и предложения"></div><figcaption><b class="ru">Главная</b><b class="en">Home</b> <span class="ru">проживание и впечатления</span><span class="en">stays and experiences</span></figcaption></figure><figure class="screen"><div class="stage"><div class="scroll-box"><div class="device scroll"><img src="img/offers-stay.webp" width="828" height="2464" loading="lazy" data-alt-ru="Доступные предложения жилья по датам" data-alt-en="Available stays by date" alt="Доступные предложения жилья по датам"></div><span class="hint"><span class="ru">↕ прокрутите</span><span class="en">↕ scroll</span></span></div></div><figcaption><b class="ru">Жильё</b><b class="en">Stays</b> <span class="ru">варианты по датам</span><span class="en">options by date</span></figcaption></figure><figure class="screen"><div class="stage"><div class="scroll-box"><div class="device scroll"><img src="img/offers-exp.webp" width="828" height="2464" loading="lazy" data-alt-ru="Слоты впечатления: время, длительность, сложность" data-alt-en="Experience slots: time, duration, difficulty" alt="Слоты впечатления: время, длительность, сложность"></div><span class="hint"><span class="ru">↕ прокрутите</span><span class="en">↕ scroll</span></span></div></div><figcaption><b class="ru">Впечатления</b><b class="en">Experiences</b> <span class="ru">слоты по времени</span><span class="en">time slots</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/voucher.webp" width="828" height="1792" loading="lazy" data-alt-ru="Детали ваучера с QR-кодом" data-alt-en="Voucher details with a QR code" alt="Детали ваучера с QR-кодом"></div><figcaption><b class="ru">Ваучер</b><b class="en">Voucher</b> <span class="ru">QR-код на входе</span><span class="en">QR code for entry</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="offline">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">04 <span class="dot"></span> <span class="ru">Офлайн-билет</span><span class="en">Offline ticket</span></span>
+        <div><h2><span class="ru">Билет работает без сети</span><span class="en">The ticket works with no signal</span></h2><p class="ru">Билет сохраняется в приложении и открывается без интернета. В одном билете может быть несколько человек: приложение показывает, сколько проходов уже использовано, а турникет пропускает ровно столько гостей, сколько оплачено.</p><p class="en">The ticket is saved in the app and opens offline. One ticket can cover several people: the app shows how many entries are used, and the turnstile lets in exactly as many guests as were paid for.</p></div>
+      </div>
+      <div class="gallery-wrap">
+        <div class="gallery-bar">
+          <div class="gt"><span class="label"><span class="ru">Экраны билета</span><span class="en">Ticket screens</span></span><h3><span class="ru">Что видит гость на входе</span><span class="en">What the guest sees at the entrance</span></h3></div>
+          <div class="arrows">
+            <button class="arrow" type="button" data-dir="-1" aria-label="Назад / Back">←</button>
+            <button class="arrow" type="button" data-dir="1" aria-label="Вперёд / Next">→</button>
+          </div>
+        </div>
+        <div class="gallery">
+          <figure class="screen"><div class="stage"><img class="device" src="img/offline.webp" width="828" height="1792" loading="lazy" data-alt-ru="Нет подключения к сети, но билеты доступны" data-alt-en="No connection, but tickets are available" alt="Нет подключения к сети, но билеты доступны"></div><figcaption><b class="ru">Без сети</b><b class="en">Offline</b> <span class="ru">билеты остаются под рукой</span><span class="en">tickets stay at hand</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/qr-full.webp" width="828" height="1792" loading="lazy" data-alt-ru="QR-код для прохода на весь экран" data-alt-en="Full-screen QR code for entry" alt="QR-код для прохода на весь экран"></div><figcaption><b class="ru">QR на весь экран</b><b class="en">Full-screen QR</b> <span class="ru">для турникета</span><span class="en">for the turnstile</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/voucher-group.webp" width="828" height="1792" loading="lazy" data-alt-ru="Ваучер на двоих: использован один проход из двух" data-alt-en="Two-person voucher: one of two entries used" alt="Ваучер на двоих: использован один проход из двух"></div><figcaption><b class="ru">Билет на группу</b><b class="en">Group ticket</b> <span class="ru">1 из 2 проходов</span><span class="en">1 of 2 entries</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="controller">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">05 <span class="dot"></span> <span class="ru">Самое сложное</span><span class="en">The hardest part</span></span>
+        <div><h2><span class="ru">Режим контролёра</span><span class="en">Controller mode</span></h2><p class="ru">Сложнее всего было считать билет и число людей в нём без сети, продумать путь для пожилых гостей и понять, как должен выглядеть внутренний интерфейс для контролёров.</p><p class="en">The hardest parts were reading a ticket and its head count offline, designing a path for older guests, and working out what the internal controller interface should look like.</p></div>
+      </div>
+      <div class="paths swipe" style="margin-bottom: var(--gap)">
+        <div class="tile path">
+          <span class="label row"><span class="dot"></span><span class="ru">Гость с приложением</span><span class="en">Guest with the app</span></span>
+          <ol>
+            <li><span class="ru">Открывает билет, даже без сети</span><span class="en">Opens the ticket, even offline</span></li>
+            <li><span class="ru">Подносит QR к турникету</span><span class="en">Holds the QR up to the turnstile</span></li>
+            <li><span class="ru">Турникет пропускает столько гостей, сколько в билете</span><span class="en">The turnstile admits as many guests as the ticket covers</span></li>
+          </ol>
+        </div>
+        <div class="tile dark path">
+          <span class="label row"><span class="dot"></span><span class="ru">Гость без приложения</span><span class="en">Guest without the app</span></span>
+          <ol>
+            <li><span class="ru">Подходит к контролёру</span><span class="en">Goes to the controller</span></li>
+            <li><span class="ru">Контролёр сам пробивает билет и принимает наличные</span><span class="en">The controller issues the ticket and takes cash</span></li>
+            <li><span class="ru">Проход и оплата попадают в ту же аналитику</span><span class="en">The entry and payment land in the same analytics</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="gallery-wrap">
+        <div class="gallery-bar">
+          <div class="gt"><span class="label"><span class="ru">Приложение контролёра</span><span class="en">Controller app</span></span><h3><span class="ru">Проход, ошибки и ручной режим</span><span class="en">Entries, errors and manual mode</span></h3></div>
+          <div class="arrows">
+            <button class="arrow" type="button" data-dir="-1" aria-label="Назад / Back">←</button>
+            <button class="arrow" type="button" data-dir="1" aria-label="Вперёд / Next">→</button>
+          </div>
+        </div>
+        <div class="gallery">
+          <figure class="screen"><div class="stage"><img class="device" src="img/ctrl-success.webp" width="828" height="1792" loading="lazy" data-alt-ru="Успешный проход: гость и количество человек" data-alt-en="Successful entry: guest and head count" alt="Успешный проход: гость и количество человек"></div><figcaption><b class="ru">Успешный проход</b><b class="en">Entry approved</b> <span class="ru">видно, сколько гостей</span><span class="en">head count is visible</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/ctrl-wrong.webp" width="828" height="1792" loading="lazy" data-alt-ru="Ошибка: QR-код для другой услуги" data-alt-en="Error: QR code is for another service" alt="Ошибка: QR-код для другой услуги"></div><figcaption><b class="ru">Чужой QR</b><b class="en">Wrong QR</b> <span class="ru">код от другой услуги</span><span class="en">code for another service</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/ctrl-expired.webp" width="828" height="1792" loading="lazy" data-alt-ru="Ошибка: срок действия QR-кода истёк" data-alt-en="Error: the QR code has expired" alt="Ошибка: срок действия QR-кода истёк"></div><figcaption><b class="ru">Истёкший QR</b><b class="en">Expired QR</b> <span class="ru">понятная причина отказа</span><span class="en">clear reason for refusal</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/ctrl-search.webp" width="828" height="1792" loading="lazy" data-alt-ru="Поиск гостя по списку" data-alt-en="Searching for a guest in the list" alt="Поиск гостя по списку"></div><figcaption><b class="ru">Поиск гостя</b><b class="en">Guest search</b> <span class="ru">для гостей без приложения</span><span class="en">for guests without the app</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/ctrl-pending.webp" width="828" height="1792" loading="lazy" data-alt-ru="Визит в ожидании: подтвердить проход" data-alt-en="Pending visit: confirm entry" alt="Визит в ожидании: подтвердить проход"></div><figcaption><b class="ru">Ручное подтверждение</b><b class="en">Manual confirm</b> <span class="ru">контролёр пропускает сам</span><span class="en">the controller admits</span></figcaption></figure><figure class="screen"><div class="stage"><img class="device" src="img/fiscal.webp" width="828" height="1900" loading="lazy" data-alt-ru="Фискальный чек оплаты" data-alt-en="Fiscal receipt" alt="Фискальный чек оплаты"></div><figcaption><b class="ru">Фискальный чек</b><b class="en">Fiscal receipt</b> <span class="ru">оплата наличными в учёте</span><span class="en">cash payments on record</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="parking">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">06 <span class="dot"></span> <span class="ru">Рост</span><span class="en">Growth</span></span>
+        <div><h2><span class="ru">Парковка появилась из спроса</span><span class="en">Parking came from demand</span></h2><p class="ru">Оплату парковки мы запустили позже, когда гости начали о ней спрашивать. В навигации раздел назван «Платежи», а не «Парковка», чтобы туда без перестройки поместились будущие допуслуги.</p><p class="en">We launched parking payments later, once guests started asking for it. In the navigation the section is called Payments, not Parking, so future add-on services fit without a rebuild.</p></div>
+      </div>
+      <div class="bento swipe">
+        <div class="grow s3"><div class="stage"><img class="device" src="img/payments.webp" width="828" height="1792" loading="lazy" data-alt-ru="Раздел «Платежи»" data-alt-en="Payments section" alt="Раздел «Платежи»"></div><div class="txt"><h3><span class="ru">Платежи</span><span class="en">Payments</span></h3><p class="ru">Общий раздел, куда встанут будущие допуслуги.</p><p class="en">A shared section ready for future add-on services.</p></div></div>
+        <div class="grow s3"><div class="stage"><img class="device" src="img/park-list.webp" width="828" height="1792" loading="lazy" data-alt-ru="Выбор места для оплаты парковки" data-alt-en="Choosing a location to pay for parking" alt="Выбор места для оплаты парковки"></div><div class="txt"><h3><span class="ru">Выбор места</span><span class="en">Pick a location</span></h3><p class="ru">Список мест, где можно оплатить парковку.</p><p class="en">A list of places where parking can be paid.</p></div></div>
+        <div class="grow s3"><div class="stage"><img class="device" src="img/park-plate.webp" width="828" height="1792" loading="lazy" data-alt-ru="Ввод госномера автомобиля" data-alt-en="Entering the car plate number" alt="Ввод госномера автомобиля"></div><div class="txt"><h3><span class="ru">Госномер</span><span class="en">Plate number</span></h3><p class="ru">Номер вводится с крупной раскладкой и форматом казахстанских номеров.</p><p class="en">The plate is entered with a large keyboard in Kazakh plate format.</p></div></div>
+        <div class="grow s3"><div class="stage"><img class="device" src="img/park-history.webp" width="828" height="1792" loading="lazy" data-alt-ru="История оплат парковки" data-alt-en="Parking payment history" alt="История оплат парковки"></div><div class="txt"><h3><span class="ru">История</span><span class="en">History</span></h3><p class="ru">Все оплаты по месяцам с фильтрами.</p><p class="en">All payments by month, with filters.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="results">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">07 <span class="dot"></span> <span class="ru">Результаты</span><span class="en">Results</span></span>
+        <div><h2><span class="ru">Около 300 операций за первый месяц</span><span class="en">About 300 transactions in the first month</span></h2><p class="ru">С августа по сентябрь через приложение прошло около 300 операций. Зимой многие активности закрываются, поэтому сезон определяет нагрузку.</p><p class="en">From August to September about 300 transactions went through the app. Many activities close in winter, so the season sets the load.</p></div>
+      </div>
+      <div class="bento">
+        <div class="tile s12" style="padding: clamp(24px, 3vw, 36px); gap: 22px">
+          <div class="metrics light fill">
+            <div class="metric"><b>~180</b><span class="ru">впечатлений</span><span class="en">experiences</span></div>
+            <div class="metric"><b>~80</b><span class="ru">бронирований жилья</span><span class="en">stay bookings</span></div>
+            <div class="metric"><b>~40</b><span class="ru">оплат парковки</span><span class="en">parking payments</span></div>
+          </div>
+          <div class="split">
+            <div class="splitbar" role="img" aria-label="180 / 80 / 40"><span class="a" style="flex:180">60%</span><span class="b" style="flex:80">27%</span><span class="c" style="flex:40">13%</span></div>
+            <div class="splitlegend"><span><i style="background:var(--ink)"></i><span class="ru">Впечатления</span><span class="en">Experiences</span></span><span><i style="background:#4A4A55"></i><span class="ru">Жильё</span><span class="en">Stays</span></span><span><i style="background:var(--yellow)"></i><span class="ru">Парковка</span><span class="en">Parking</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="growth-me">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">08 <span class="dot"></span> <span class="ru">Что показывает кейс</span><span class="en">What this case shows</span></span>
+        <div><h2><span class="ru">B2C-продукт в реальном мире</span><span class="en">A B2C product in the real world</span></h2></div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s3"><span class="num">01</span><h3><span class="ru">Дизайн для офлайна</span><span class="en">Designing for offline</span></h3><p class="ru">Интерфейс, который работает там, где пропадает связь.</p><p class="en">An interface that works where the signal drops.</p></div>
+        <div class="tile s3"><span class="num">02</span><h3><span class="ru">Инклюзивность</span><span class="en">Inclusion</span></h3><p class="ru">Отдельный путь для гостей, которые не пользуются приложением.</p><p class="en">A separate path for guests who don't use the app.</p></div>
+        <div class="tile s3"><span class="num">03</span><h3><span class="ru">Сервис целиком</span><span class="en">The whole service</span></h3><p class="ru">Приложение гостя, приложение контролёра и турникет как одна система.</p><p class="en">Guest app, controller app and turnstile as one system.</p></div>
+        <div class="tile s3"><span class="num">04</span><h3><span class="ru">Быстрые итерации</span><span class="en">Fast iteration</span></h3><p class="ru">От проблемы на месте до нового решения в дизайне за короткий цикл.</p><p class="en">From an on-site problem to a design fix in a short loop.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="team">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">09 <span class="dot"></span> <span class="ru">Команда</span><span class="en">Team</span></span>
+        <div><h2><span class="ru">Кто делал Qazaq Travel</span><span class="en">The team behind Qazaq Travel</span></h2></div>
+      </div>
+      <div class="bento">
+        <div class="tile s6 member lead-card">
+          <span class="label row"><span class="dot"></span><span class="ru">Я · UX/UI-дизайнер</span><span class="en">Me · UX/UI designer</span></span>
+          <h3><span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></h3>
+          <ul class="list">
+            <li><span class="dot"></span><span><span class="ru">Исследование и анализ конкурентов</span><span class="en">Research and competitor analysis</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Сценарии и пользовательский путь</span><span class="en">Flows and the user journey</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Интерфейс приложения гостя и контролёра с нуля</span><span class="en">Guest and controller app UI from scratch</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Тестирование на месте и итерации</span><span class="en">On-site testing and iterations</span></span></li>
+          </ul>
+        </div>
+        <div class="s6" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)">
+          <div class="tile member"><span class="role"><span class="ru">Разработка</span><span class="en">Engineering</span></span><h3><span class="ru">Фронтенд-разработчик</span><span class="en">Front-end developer</span></h3></div>
+          <div class="tile member"><span class="role"><span class="ru">Разработка</span><span class="en">Engineering</span></span><h3><span class="ru">Бэкенд-разработчик</span><span class="en">Back-end developer</span></h3></div>
+          <div class="tile member" style="grid-column: span 2"><span class="role"><span class="ru">Руководство</span><span class="en">Leadership</span></span><h3><span class="ru">Техлид</span><span class="en">Tech lead</span></h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="label row sec"><span class="dot"></span><span class="ru">Контакты</span><span class="en">Contact</span></span>
+      <h2><span class="ru">Дана Орынбетова<i>.</i><br>UX/UI-дизайнер</span><span class="en">Dana Orynbetova<i>.</i><br>UX/UI designer</span></h2>
+      <div class="links">
+        <a class="btn solid" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram <small>@orynbetova</small></a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/%D0%B4%D0%B0%D0%BD%D0%B0-%D0%BE%D1%80%D1%8B%D0%BD%D0%B1%D0%B5%D1%82%D0%BE%D0%B2%D0%B0-54a24b240" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
+        <a class="btn ghost" href="https://www.behance.net/orynbetova" target="_blank" rel="noopener">Behance <span class="arr">↗</span></a>
+        <a class="btn ghost" href="mailto:orynbetova777@gmail.com">orynbetova777@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap line">
+    <span class="who"><span class="dot name"></span>© 2026 <span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></span>
+    <span>Qazaq Travel · <a href="https://apps.apple.com/kz/app/qazaq-travel/id6753318943" target="_blank" rel="noopener">App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.kz.qazaqTravel" target="_blank" rel="noopener">Google Play</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var titles = { ru: "Кейс Qazaq Travel · Дана Орынбетова", en: "Qazaq Travel case study · Dana Orynbetova" };
+  var lang = "ru";
+
+  function apply(l) {
+    lang = l;
+    root.setAttribute("data-lang", l);
+    root.setAttribute("lang", l);
+    document.title = titles[l];
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === l));
+    });
+    document.querySelectorAll("img[data-alt-" + l + "]").forEach(function (img) {
+      img.alt = img.getAttribute("data-alt-" + l);
+    });
+  }
+  function initial() {
+    var h = (location.hash || "").replace("#", "");
+    if (h === "en" || h === "ru") return h;
+    try { var q = new URLSearchParams(location.search).get("lang"); if (q === "en" || q === "ru") return q; } catch (e) {}
+    try { var s = localStorage.getItem("case-lang"); if (s === "en" || s === "ru") return s; } catch (e) {}
+    return /^(ru|kk|uk|be)/.test((navigator.language || "ru").toLowerCase()) ? "ru" : "en";
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set-lang");
+      apply(l);
+      try { localStorage.setItem("case-lang", l); } catch (e) {}
+      try { history.replaceState(null, "", "#" + l); } catch (e) {}
+    });
+  });
+  window.addEventListener("hashchange", function () {
+    var h = location.hash.replace("#", "");
+    if (h === "en" || h === "ru") apply(h);
+  });
+
+  /* section nav */
+  document.querySelectorAll("[data-go]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.getAttribute("data-go"));
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  document.querySelector(".me").addEventListener("click", function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  /* scroll progress */
+  var bar = document.querySelector(".progress");
+  function prog() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.setProperty("--p", max > 0 ? Math.min(1, scrollY / max) : 0);
+  }
+  addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
+
+  /* galleries */
+  document.querySelectorAll(".gallery-wrap").forEach(function (w) {
+    var g = w.querySelector(".gallery"), prev = w.querySelector('[data-dir="-1"]'), next = w.querySelector('[data-dir="1"]');
+    function upd() {
+      prev.disabled = g.scrollLeft <= 4;
+      next.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4;
+      w.querySelector(".arrows").style.display = g.scrollWidth > g.clientWidth + 4 ? "flex" : "none";
+    }
+    [prev, next].forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = g.querySelector(".screen");
+        var step = card ? card.getBoundingClientRect().width + 12 : 280;
+        g.scrollBy({ left: step * Number(btn.getAttribute("data-dir")), behavior: "smooth" });
+      });
+    });
+    g.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); upd();
+  });
+
+  /* scroll hints */
+  document.querySelectorAll(".scroll-box").forEach(function (box) {
+    var d = box.querySelector(".device.scroll");
+    d.addEventListener("scroll", function () { if (d.scrollTop > 8) box.classList.add("scrolled"); }, { passive: true });
+  });
+
+  apply(initial());
+})();
+</script>
+</body>
+</html>
