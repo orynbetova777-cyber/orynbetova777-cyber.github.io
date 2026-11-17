@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кейс Joozim · Дана Орынбетова</title>
+<meta name="description" content="Joozim: B2B-маркетплейс оптовых закупок для магазинов Казахстана. Кейс UX/UI-дизайнера Даны Орынбетовой.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout idea: a calm neutral canvas built from bento plates. Screens sit on grey stages. Joozim yellow marks accents; purple appears only next to Dana's name. */
+  --bg: #F3F3F5;
+  --card: #FFFFFF;
+  --stage: #E9E9EE;
+  --ink: #131317;
+  --ink-soft: #2B2B32;
+  --muted: #6D6D78;
+  --line: #E2E2E8;
+  --accent: #732BF5; /* only next to Dana's name */
+  --yellow: #FFB800;
+  --display: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --body: "Onest", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  /* type scale */
+  --t-hero: clamp(64px, 10.5vw, 148px);
+  --t-num: clamp(56px, 7.4vw, 108px);
+  --t-h2: clamp(32px, 4.6vw, 60px);
+  --t-quote: clamp(30px, 3.9vw, 50px);
+  --t-h3: clamp(20px, 1.7vw, 24px);
+  --t-lead: clamp(18px, 1.6vw, 21px);
+  --t-body: 16.5px;
+  --t-small: 14.5px;
+
+  --wrap: 1200px;
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --r-lg: 28px;
+  --r-md: 22px;
+  --gap: 12px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t-body)/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--display); font-weight: 600; letter-spacing: -.03em; }
+h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -.02em; }
+p { margin: 0; }
+html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.label { font: 500 12.5px/1.4 var(--mono); letter-spacing: 0; color: var(--muted); }
+/* section overlines stay in caps */
+.head .label, .label.sec { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+.label.row { display: flex; align-items: center; gap: 10px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); flex: none; }
+.dot.name { background: var(--accent); }
+.dot.grey { background: #C4C4CE; }
+.muted { color: var(--muted); }
+
+/* header */
+.top { position: sticky; top: 0; z-index: 30; background: rgb(243 243 245 / .78); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid rgb(19 19 23 / .06); }
+.top-in { max-width: var(--wrap); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.me { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1 var(--body); text-decoration: none; }
+.nav { display: flex; gap: 4px; }
+.nav button { border: 0; background: transparent; padding: 8px 12px; border-radius: 999px; font: 500 14px/1 var(--body); color: var(--muted); cursor: pointer; }
+.nav button:hover { color: var(--ink); background: rgb(19 19 23 / .05); }
+.lang { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+.lang button { border: 0; background: transparent; padding: 8px 14px; border-radius: 999px; font: 500 13px/1 var(--mono); letter-spacing: .05em; color: var(--muted); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+
+/* hero */
+.hero { padding: clamp(36px, 6vw, 72px) 0 0; }
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 28px; align-items: center; }
+.hero-text { grid-column: 1 / span 6; padding-right: clamp(0px, 2vw, 28px); }
+.hero-stage { grid-column: 7 / span 6; }
+.crumbs { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font: 500 14px/1 var(--body); color: var(--muted); }
+.crumbs a { text-decoration: none; color: var(--muted); }
+.crumbs a:hover { color: var(--ink); }
+.crumbs .sep { opacity: .5; }
+.crumbs [aria-current] { color: var(--ink); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 13px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font: 500 14px/1 var(--body); }
+.hero h1 { font-size: var(--t-hero); line-height: .9; letter-spacing: -.055em; margin: 22px 0; }
+.hero h1 i { font-style: normal; color: var(--yellow); }
+.lead { font-size: var(--t-lead); line-height: 1.5; max-width: 30em; color: var(--ink-soft); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; text-decoration: none; font: 500 15px/1 var(--body); border: 1px solid var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.btn.solid { background: var(--ink); color: #fff; }
+.btn.ghost { background: transparent; }
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--ink); color: #fff; }
+.btn .arr { font-family: var(--mono); font-size: 13px; opacity: .7; }
+.btn small { font: 400 12px/1 var(--mono); opacity: .6; }
+
+.stage { background: var(--stage); border-radius: var(--r-lg); padding: clamp(18px, 2.4vw, 28px); display: grid; place-items: center; }
+.hero-stage { padding: clamp(22px, 3vw, 36px) clamp(22px, 3vw, 36px) 20px; gap: 16px; }
+.phone { --ph: min(600px, 70vh); position: relative; width: min(100%, 290px); height: var(--ph); border-radius: 30px; overflow: hidden; background: var(--card); box-shadow: 0 30px 60px -30px rgb(19 19 23 / .35), 0 0 0 1px rgb(19 19 23 / .06); }
+.phone img { width: 100%; animation: feed 34s linear infinite; }
+.phone:hover img { animation-play-state: paused; }
+@keyframes feed {
+  0% { transform: translateY(0); opacity: 0; }
+  2% { transform: translateY(0); opacity: 1; }
+  6% { transform: translateY(0); }
+  93% { transform: translateY(calc(-100% + var(--ph))); opacity: 1; }
+  98% { transform: translateY(calc(-100% + var(--ph))); opacity: 1; }
+  100% { transform: translateY(calc(-100% + var(--ph))); opacity: 0; }
+}
+.cap { text-align: center; font: 400 12.5px/1.45 var(--mono); color: var(--muted); }
+
+/* bento */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
+.tile { background: var(--card); border-radius: var(--r-md); padding: 24px 26px; display: grid; gap: 12px; align-content: start; min-width: 0; border: 1px solid rgb(19 19 23 / .04); }
+.tile .val { font: 500 21px/1.3 var(--display); letter-spacing: -.02em; }
+.tile.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.tile.dark .label { color: rgb(255 255 255 / .55); }
+.tile p { font-size: var(--t-small); line-height: 1.55; color: var(--muted); }
+.tile.dark p { color: rgb(255 255 255 / .72); }
+.s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
+
+/* metrics */
+.metrics { display: flex; flex-wrap: wrap; align-items: flex-end; column-gap: var(--mgap); row-gap: 18px; --mgap: clamp(28px, 4vw, 56px); }
+.metric { padding-left: var(--mgap); border-left: 1px solid rgb(255 255 255 / .14); }
+.metric:first-child { padding-left: 0; border-left: 0; }
+.metric b { display: flex; align-items: baseline; gap: .12em; font: 600 var(--t-num)/.95 var(--display); letter-spacing: -.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.metric b small { font-size: .36em; letter-spacing: -.02em; font-weight: 500; opacity: .75; }
+.metric > span { display: block; margin-top: 14px; font-size: 15px; opacity: .7; }
+.metrics.light .metric { border-left-color: var(--line); }
+.metrics.light .metric b { font-size: clamp(44px, 6.4vw, 92px); }
+/* chips */
+.roles { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; background: var(--bg); font: 500 16px/1 var(--body); white-space: nowrap; }
+
+/* sections */
+section.block { padding: clamp(72px, 9vw, 128px) 0 0; scroll-margin-top: 70px; }
+.head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 14px; align-items: start; margin-bottom: clamp(24px, 3.5vw, 44px); }
+.head > .label { grid-column: 1 / span 6; }
+.head > :last-child { grid-column: 7 / span 6; }
+.head .label { display: flex; align-items: center; gap: 10px; padding-top: clamp(8px, 1.4vw, 20px); }
+.head h2 { font-size: var(--t-h2); line-height: 1.02; }
+.head p { margin-top: 18px; font-size: 17px; color: var(--ink-soft); }
+
+/* lists */
+.list { list-style: none; margin: 0; padding: 0; display: grid; }
+.list li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: baseline; padding: 15px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.45; }
+.list li:first-child { border-top: 0; }
+.tile.dark .list li { border-color: rgb(255 255 255 / .1); }
+
+/* research */
+.num { font: 500 12px/1 var(--mono); color: var(--muted); }
+.tile.dark p.quote { font: 600 var(--t-h3)/1.25 var(--display); letter-spacing: -.02em; max-width: 30em; color: #fff; }
+.insight { padding: clamp(30px, 4.4vw, 56px); gap: 24px; }
+
+/* swimlane */
+.flow { padding: clamp(20px, 2.4vw, 28px); gap: 18px; }
+.flow-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.facts { display: flex; gap: 8px; flex-wrap: wrap; }
+.fact { padding: 9px 14px; border-radius: 999px; background: var(--bg); font: 500 14px/1 var(--body); }
+.fact b { font-weight: 600; }
+.lanes-wrap { overflow-x: auto; overflow-y: hidden; margin: -14px -10px; padding: 14px 10px; }
+.lanes { position: relative; display: grid; grid-template-columns: 44px repeat(4, minmax(0, 1fr)); grid-template-rows: auto repeat(7, auto); column-gap: 10px; row-gap: 22px; min-width: 720px; }
+.lane-bg { grid-row: 1 / -1; border-radius: 18px; margin: -10px -5px; }
+.lane-bg.alt { background: var(--bg); }
+.lane-name { grid-row: 1; display: flex; align-items: center; gap: 10px; padding: 4px 6px 6px; font: 500 15px/1.25 var(--body); z-index: 1; }
+.lane-name .ico { width: 30px; height: 30px; border-radius: 10px; background: var(--card); box-shadow: 0 0 0 1px var(--line); display: grid; place-items: center; font: 500 11px/1 var(--mono); color: var(--muted); flex: none; }
+.row-num { grid-column: 1; align-self: center; font: 500 11.5px/1 var(--mono); color: var(--muted); z-index: 1; }
+.stepc { align-self: center; z-index: 2; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 0 0 1px var(--line), 0 10px 24px -18px rgb(19 19 23 / .4); display: grid; gap: 4px; transition: transform .2s ease, box-shadow .2s ease; }
+.stepc:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--ink), 0 14px 28px -18px rgb(19 19 23 / .45); }
+.stepc .n { display: flex; align-items: center; gap: 8px; font: 500 12px/1.2 var(--mono); color: var(--muted); }
+.stepc b { font: 600 16px/1.25 var(--body); }
+.stepc span.d { font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+.stepc.final { background: var(--ink); box-shadow: none; }
+.stepc.final b, .stepc.final .d, .stepc.final .n { color: #fff; }
+
+.who-tag { display: none; justify-self: start; margin-bottom: 4px; padding: 4px 8px; border-radius: 6px; background: var(--bg); font: 500 11px/1 var(--mono); color: var(--muted); }
+.stepc.final .who-tag { background: rgb(255 255 255 / .12); color: rgb(255 255 255 / .7); }
+.flowsvg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
+.flowsvg path { fill: none; stroke: #B4B4BF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5 6; animation: dash 1.4s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -22; } }
+.swipe-hint { display: none; font: 500 12.5px/1 var(--mono); color: var(--muted); }
+.flow-note { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+
+/* galleries */
+.gallery-wrap { position: relative; margin-top: var(--gap); }
+.gallery-bar { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin: clamp(28px, 3.5vw, 44px) 0 16px; }
+.gallery-bar .gt { display: grid; gap: 6px; }
+.arrows { display: flex; gap: 8px; }
+.arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); cursor: pointer; font: 400 16px/1 var(--mono); transition: background .2s, color .2s, opacity .2s; }
+.arrow:hover:not(:disabled) { background: var(--ink); color: #fff; border-color: var(--ink); }
+.arrow:disabled { opacity: .35; cursor: default; }
+.gallery { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * var(--gap)) / 4); gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 6px; scrollbar-width: none; }
+.gallery::-webkit-scrollbar { display: none; }
+.screen { margin: 0; display: grid; gap: 14px; align-content: start; scroll-snap-align: start; }
+.screen .stage { padding: 20px 18px; }
+.screen figcaption { text-align: center; font-size: var(--t-small); line-height: 1.45; color: var(--muted); padding: 0 8px; }
+.screen figcaption b { color: var(--ink); font-weight: 500; }
+.device { width: 100%; max-width: 260px; margin: 0 auto; }
+.device.scroll { position: relative; aspect-ratio: 414 / 896; overflow-y: auto; border-radius: 26px; background: var(--card); scrollbar-width: thin; scrollbar-color: rgb(19 19 23 / .25) transparent; overscroll-behavior: contain; }
+.scroll-box { position: relative; width: 100%; max-width: 260px; margin: 0 auto; }
+.hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 6px 10px; border-radius: 999px; background: rgb(19 19 23 / .82); color: #fff; font: 500 11px/1 var(--mono); letter-spacing: .04em; pointer-events: none; transition: opacity .3s; white-space: nowrap; }
+.scroll-box.scrolled .hint { opacity: 0; }
+
+/* compare */
+.compare-card { background: var(--stage); border-color: transparent; padding: 30px 22px 26px; gap: 18px; }
+.compare { position: relative; width: 100%; max-width: 300px; margin: 0 auto; --pos: 50%; user-select: none; }
+.compare .viewport { aspect-ratio: 414 / 896; overflow: hidden; border-radius: 30px; background: var(--card); }
+.compare .layers { position: relative; }
+.compare .after { position: absolute; inset: 0 0 auto 0; width: 100%; clip-path: inset(0 0 0 var(--pos)); }
+.compare .divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--ink); pointer-events: none; }
+.compare .knob { position: absolute; top: 50%; left: var(--pos); transform: translate(-50%, -50%); width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: #fff; border: 3px solid #fff; box-shadow: 0 6px 16px rgb(19 19 23 / .3); cursor: ew-resize; display: grid; place-items: center; font: 500 12px/1 var(--mono); touch-action: none; }
+.compare .tag { position: absolute; top: 12px; padding: 6px 10px; border-radius: 999px; font: 500 12px/1 var(--mono); pointer-events: none; }
+.compare .tag.b { left: 12px; background: rgb(255 255 255 / .94); color: var(--muted); box-shadow: 0 0 0 1px var(--line); }
+.compare .tag.a { right: 12px; background: var(--ink); color: #fff; }
+.compare-note { text-align: center; display: grid; gap: 8px; justify-items: center; padding: 0 10px; }
+.compare-note p { font-size: var(--t-small); line-height: 1.55; color: var(--muted); max-width: 32em; }
+
+/* ecosystem */
+.eco { padding: clamp(22px, 2.6vw, 32px); gap: 18px; }
+.tools { display: grid; gap: 10px; position: relative; }
+.toolc { display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 16px; border-radius: 16px; background: var(--bg); }
+.toolc .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--card); display: grid; place-items: center; font: 600 15px/1 var(--display); box-shadow: 0 0 0 1px var(--line); }
+.toolc b { display: block; font: 600 17px/1.2 var(--display); letter-spacing: -.02em; }
+.toolc span { display: block; font-size: 13.5px; line-height: 1.4; color: var(--muted); margin-top: 3px; }
+.toolc .tag { font: 500 11px/1 var(--mono); letter-spacing: 0; padding: 4px 7px; border-radius: 6px; background: var(--card); color: var(--muted); box-shadow: 0 0 0 1px var(--line); white-space: nowrap; align-self: start; }
+.toolc.ext { background: transparent; box-shadow: inset 0 0 0 1px #D5D5DD; }
+.switch { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--muted); padding-top: 4px; }
+.switch i { font-style: normal; font-family: var(--mono); color: var(--ink); }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr); align-items: stretch; }
+.big { border-radius: 18px; padding: 18px; display: grid; gap: 12px; align-content: start; }
+.big.app { background: var(--ink); color: #fff; }
+.big.sales { background: var(--bg); }
+.big .head2 { display: flex; align-items: center; gap: 12px; }
+.big .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font: 600 15px/1 var(--display); }
+.big.app .ic { background: rgb(255 255 255 / .1); }
+.big.sales .ic { background: var(--yellow); color: var(--ink); }
+.big b { font: 600 20px/1.15 var(--display); letter-spacing: -.02em; }
+.big small { display: block; font-size: 13px; opacity: .65; margin-top: 3px; }
+.big ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.big li { padding: 9px 0; border-top: 1px solid rgb(19 19 23 / .08); font-size: 13.5px; line-height: 1.4; }
+.big.app li { border-top-color: rgb(255 255 255 / .1); }
+.big li:first-child { border-top: 0; }
+.wire { position: relative; display: grid; align-content: center; justify-items: center; gap: 8px; }
+.wire::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: repeating-linear-gradient(90deg, #B4B4BF 0 6px, transparent 6px 12px); background-size: 24px 2px; animation: wire 1.2s linear infinite; }
+@keyframes wire { to { background-position: 24px 0; } }
+.wire span { position: relative; z-index: 1; padding: 5px 8px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: 500 11.5px/1 var(--mono); white-space: nowrap; }
+
+/* features */
+.feat { list-style: none; margin: 0; padding: 0; display: grid; }
+.feat li { padding: 13px 0; border-top: 1px solid var(--line); font-size: 15.5px; display: flex; gap: 12px; align-items: baseline; }
+.feat li:first-child { border-top: 0; }
+
+/* growth */
+.grow { display: grid; gap: 16px; align-content: start; }
+.grow .stage { padding: 22px 18px; }
+.grow .txt { text-align: center; display: grid; gap: 6px; padding: 0 10px; }
+.grow p { font-size: var(--t-small); line-height: 1.5; color: var(--muted); }
+
+/* visuals */
+.visual { border-radius: var(--r-md); overflow: hidden; background: var(--card); padding: 12px; }
+.visual img { width: 100%; border-radius: 14px; }
+
+/* chart */
+.chart-card { padding: clamp(20px, 2.6vw, 32px); gap: 20px; }
+.chart-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.chart-top h3 { font-size: var(--t-h3); }
+.legend { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+.legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--ink); }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart .grid line { stroke: var(--line); stroke-width: 1; }
+.chart .axis text { fill: var(--muted); font: 400 11px var(--mono); }
+.chart .bar { fill: var(--ink); }
+.chart .bar.peak-bar { fill: var(--yellow); }
+.chart .hit { fill: transparent; cursor: pointer; }
+.chart .peak text { fill: var(--ink); font: 600 13px var(--body); }
+.chart .peak line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; }
+.tip { position: absolute; pointer-events: none; transform: translate(-50%, calc(-100% - 10px)); background: var(--ink); color: #fff; padding: 8px 10px; border-radius: 10px; font: 500 12.5px/1.3 var(--body); white-space: nowrap; opacity: 0; transition: opacity .15s; }
+.tip small { display: block; font: 400 11px/1.3 var(--mono); opacity: .65; }
+.tip.on { opacity: 1; }
+details.table { font-size: 14px; color: var(--muted); }
+details.table summary { cursor: pointer; font: 500 12.5px/1.4 var(--mono); }
+details.table table { margin-top: 12px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+details.table td, details.table th { padding: 4px 14px 4px 0; text-align: left; font-size: 13px; }
+
+/* team */
+.member { gap: 10px; }
+.member.lead-card { padding: clamp(24px, 3vw, 34px); }
+.member.lead-card h3 { font-size: clamp(26px, 2.6vw, 34px); }
+.member .role { font: 500 12.5px/1.4 var(--mono); color: var(--muted); }
+
+/* contact */
+.contact { padding: clamp(80px, 10vw, 140px) 0 40px; scroll-margin-top: 70px; }
+.contact h2 { font-size: clamp(40px, 7vw, 96px); line-height: .95; letter-spacing: -.05em; margin-top: 18px; }
+.contact h2 i { font-style: normal; color: var(--accent); }
+footer .who { display: inline-flex; align-items: center; gap: 8px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+footer { padding: 28px 0 44px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 400 12.5px/1.5 var(--mono); color: var(--muted); }
+footer .wrap > span { padding-top: 22px; }
+footer .line { border-top: 1px solid var(--line); }
+
+/* responsive */
+@media (max-width: 1040px) {
+  .nav { display: none; }
+  .gallery { grid-auto-columns: calc((100% - 2 * var(--gap)) / 2.4); }
+  .pair { grid-template-columns: 1fr; gap: 10px; }
+  .wire { min-height: 56px; }
+  .wire::before { left: 50%; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: repeating-linear-gradient(180deg, #B4B4BF 0 6px, transparent 6px 12px); background-size: 2px 24px; animation: wire-v 1.2s linear infinite; }
+  @keyframes wire-v { to { background-position: 0 24px; } }
+  .wire { grid-auto-flow: column; }
+}
+@media (max-width: 860px) {
+  .head > .label, .head > :last-child { grid-column: 1 / -1; }
+  .s3, .s4, .s5, .s6, .s7, .s8 { grid-column: span 6; }
+  .wide-m { grid-column: span 12; }
+}
+@media (max-width: 760px) {
+  .hero-text, .hero-stage { grid-column: 1 / -1; }
+  .hero-stage { max-width: 420px; width: 100%; justify-self: center; }
+}
+@media (max-width: 700px) {
+  .lanes-wrap { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; margin: 0 -22px; padding: 4px 22px 8px; scroll-padding: 0 22px; scrollbar-width: none; }
+  .lanes-wrap::-webkit-scrollbar { display: none; }
+  .lanes { display: flex; gap: 10px; min-width: 0; }
+  .lane-bg, .lane-name, .row-num, .flowsvg { display: none; }
+  .stepc { flex: 0 0 72%; scroll-snap-align: start; align-self: stretch; }
+  .who-tag { display: inline-flex; }
+  .swipe-hint { display: inline-flex !important; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .s3, .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; }
+  .metrics { flex-direction: column; align-items: stretch; row-gap: 0; }
+  .metric, .metric:first-child { padding: 16px 0; border-left: 0; border-top: 1px solid rgb(255 255 255 / .14); }
+  .metric:first-child { border-top: 0; padding-top: 4px; }
+  .metrics.light .metric { border-top-color: var(--line); }
+  .fact-t { grid-column: span 6; padding: 18px; }
+  .swipe { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--gap); margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 2px var(--gutter) 8px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe > * { flex: 0 0 84%; scroll-snap-align: start; }
+  .swipe > .visual { flex-basis: 88%; }
+  .visual.strip { overflow-x: auto; scrollbar-width: none; }
+  .visual.strip::-webkit-scrollbar { display: none; }
+  .visual.strip img { width: 720px; max-width: none; }
+  .swipe .pair { grid-template-columns: 1fr; gap: 10px; }
+  .toolc { grid-template-columns: 40px 1fr; gap: 12px; padding: 14px; }
+  .toolc .ic { width: 40px; height: 40px; }
+  .toolc .tag { grid-column: 2; justify-self: start; margin-top: -4px; }
+  .member:not(.lead-card) h3 { font-size: 17px; hyphens: none; }
+  .member:not(.lead-card) { padding: 18px; }
+  .fact-t .val { font-size: 17px; }
+  .chip { font-size: 14.5px; padding: 10px 14px; }
+  .gallery { grid-auto-columns: 78%; }
+  .lang button { padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone { overflow-y: auto; }
+  .phone img, .flowsvg path, .wire::before { animation: none; }
+  .gallery { scroll-behavior: auto; }
+  .btn, .stepc { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="me" href="#top"><span class="dot name"></span><span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></a>
+    <nav class="nav" aria-label="Разделы / Sections">
+      <button type="button" data-go="context"><span class="ru">Контекст</span><span class="en">Context</span></button>
+      <button type="button" data-go="research"><span class="ru">Исследование</span><span class="en">Research</span></button>
+      <button type="button" data-go="ordering"><span class="ru">Решения</span><span class="en">Solutions</span></button>
+      <button type="button" data-go="results"><span class="ru">Результаты</span><span class="en">Results</span></button>
+      <button type="button" data-go="contact"><span class="ru">Контакты</span><span class="en">Contact</span></button>
+    </nav>
+    <div class="lang" role="group" aria-label="Язык / Language">
+      <button type="button" id="lang-ru" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <nav class="crumbs" aria-label="Breadcrumbs"><a href="../"><span class="ru">Все кейсы</span><span class="en">All case studies</span></a><span class="sep">/</span><span aria-current="page">Joozim</span></nav>
+          <span class="pill"><span class="dot"></span><span class="ru">Кейс · B2B-маркетплейс · Казахстан</span><span class="en">Case study · B2B marketplace · Kazakhstan</span></span>
+          <h1>Joozim<i>.</i></h1>
+          <p class="lead ru">Оптовые закупки для магазинов в одном приложении. Магазин собирает заказ сам, видит каждый этап доставки и повторяет прошлые заказы в одно нажатие.</p>
+          <p class="lead en">Wholesale purchasing for stores in one app. A store builds its own order, tracks every step of delivery and repeats past orders with one tap.</p>
+          <div class="actions">
+            <a class="btn solid" href="https://apps.apple.com/kz/app/id6760811935" target="_blank" rel="noopener">App Store <span class="arr">↗</span></a>
+            <a class="btn ghost" href="https://play.google.com/store/apps/details?id=dd.joozim" target="_blank" rel="noopener">Google Play <span class="arr">↗</span></a>
+          </div>
+        </div>
+        <div class="stage hero-stage">
+          <div class="phone">
+            <img src="img/home-full.webp" width="828" height="7990" data-alt-ru="Главный экран Joozim: баннеры, «Вы заказывали» с кнопкой «Повторить заказ», хиты продаж, подборки и поставщики" data-alt-en="Joozim home screen: banners, “You ordered” with a Repeat order button, best sellers, collections and suppliers" alt="Главный экран Joozim: баннеры, «Вы заказывали» с кнопкой «Повторить заказ», хиты продаж, подборки и поставщики">
+          </div>
+          <p class="cap"><span class="ru">Главный экран после редизайна</span><span class="en">Home screen after the redesign</span></p>
+        </div>
+      </div>
+
+      <div class="bento" style="margin-top: clamp(28px, 4vw, 48px)">
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Роль</span><span class="en">Role</span></span><span class="val"><span class="ru">UX/UI-дизайнер</span><span class="en">UX/UI designer</span></span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Срок</span><span class="en">Timeline</span></span><span class="val"><span class="ru">4 месяца</span><span class="en">4 months</span></span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Платформы</span><span class="en">Platforms</span></span><span class="val">iOS · Android</span></div>
+        <div class="tile s3 fact-t"><span class="label"><span class="ru">Запуск</span><span class="en">Launch</span></span><span class="val"><span class="ru">Талдыкорган</span><span class="en">Taldykorgan</span></span></div>
+
+        <div class="tile dark s12" style="padding: clamp(24px, 3vw, 36px)">
+          <span class="label row"><span class="dot"></span><span class="ru">Результат · Талдыкорган · 20.08–17.11.2026</span><span class="en">Results · Taldykorgan · Aug 20 – Nov 17, 2026</span></span>
+          <div class="metrics" style="margin-top: 14px">
+            <div class="metric"><b>414</b><span class="ru">заказов оформлено</span><span class="en">orders placed</span></div>
+            <div class="metric"><b>6,24<small><span class="ru">млн ₸</span><span class="en">M ₸</span></small></b><span class="ru">оборот по всем заказам</span><span class="en">total order value</span></div>
+            <div class="metric"><b>310</b><span class="ru">магазинов в системе</span><span class="en">stores onboarded</span></div>
+          </div>
+        </div>
+
+        <div class="tile s12 roles">
+          <span class="label"><span class="ru">Роли в приложении</span><span class="en">Roles in the app</span></span>
+          <div class="chips">
+            <span class="chip"><span class="ru">Менеджер</span><span class="en">Manager</span></span>
+            <span class="chip"><span class="ru">Управляющий</span><span class="en">Owner</span></span>
+            <span class="chip"><span class="ru">Поставщик</span><span class="en">Supplier</span></span>
+            <span class="chip"><span class="ru">Курьер</span><span class="en">Courier</span></span>
+            <span class="chip"><span class="ru">Торговый представитель</span><span class="en">Sales rep</span></span>
+            <span class="chip"><span class="ru">Супервайзер</span><span class="en">Supervisor</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 CONTEXT -->
+  <section class="block" id="context">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">01 <span class="dot"></span> <span class="ru">Контекст</span><span class="en">Context</span></span>
+        <div>
+          <h2><span class="ru">Заказ у оптовика держался на телефоне</span><span class="en">Wholesale orders ran on phone calls</span></h2>
+          <p class="ru">Магазины закупают товар у оптовых поставщиков со своими складами. До Joozim заказ принимали по телефону и заполняли вручную. Когда я пришла в проект, были только незаконченные макеты клиентской части. Я начала с редизайна, затем спроектировала остальные роли, перестроила навигацию и добавила новые функции.</p>
+          <p class="en">Stores buy their stock from wholesale distributors who run their own warehouses. Before Joozim, orders were taken over the phone and written up by hand. When I joined, the only design work was an unfinished set of mockups for the store side. I started with a redesign, then designed the remaining roles, rebuilt the navigation and added new features.</p>
+        </div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s6">
+          <span class="label"><span class="ru">Было</span><span class="en">Before</span></span>
+          <ul class="list">
+            <li><span class="dot grey"></span><span><span class="ru">Заказ диктуют по телефону, его записывают вручную</span><span class="en">Orders dictated by phone and written down by hand</span></span></li>
+            <li><span class="dot grey"></span><span><span class="ru">Непонятно, когда и во сколько приедет заказ</span><span class="en">No way to know when the delivery will arrive</span></span></li>
+            <li><span class="dot grey"></span><span><span class="ru">Тот же заказ каждый месяц собирают заново</span><span class="en">The same order rebuilt from scratch every month</span></span></li>
+            <li><span class="dot grey"></span><span><span class="ru">Аналитика продаж разбросана по стороннему сервису, админке и приложению</span><span class="en">Sales analytics split across a third-party tool, the admin panel and the app</span></span></li>
+          </ul>
+        </div>
+        <div class="tile dark s6">
+          <span class="label"><span class="ru">Стало</span><span class="en">After</span></span>
+          <ul class="list">
+            <li><span class="dot"></span><span><span class="ru">Магазин сам собирает корзину в приложении</span><span class="en">Stores build their own cart in the app</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Статус виден на каждом этапе, от обработки до доставки</span><span class="en">Status is visible at every step, from processing to delivery</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Заказы хранятся в архиве и повторяются в одно нажатие</span><span class="en">Orders are archived and repeat with one tap</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Своя аналитика Joozim Sales, связанная с работой торговых представителей</span><span class="en">Our own analytics tool, Joozim Sales, tied to sales reps' activity</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 RESEARCH -->
+  <section class="block" id="research">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">02 <span class="dot"></span> <span class="ru">Исследование</span><span class="en">Research</span></span>
+        <h2><span class="ru">Что мы узнали у магазинов</span><span class="en">What we learned from stores</span></h2>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s3"><span class="num">01</span><h3><span class="ru">Выезды в магазины</span><span class="en">Store visits</span></h3><p class="ru">Торговые представители ездили по точкам и смотрели, как магазины заказывают товар сейчас.</p><p class="en">Sales reps visited stores to see how they order stock today.</p></div>
+        <div class="tile s3"><span class="num">02</span><h3><span class="ru">Интервью</span><span class="en">Interviews</span></h3><p class="ru">После выездов я разговаривала с торговыми представителями о том, что они увидели.</p><p class="en">After the visits, I interviewed the sales reps about what they had seen.</p></div>
+        <div class="tile s3"><span class="num">03</span><h3><span class="ru">Конкуренты</span><span class="en">Competitors</span></h3><p class="ru">Разобрала сервисы оптовых закупок и собрала референсы по сценариям и интерфейсу.</p><p class="en">I analyzed wholesale ordering services and collected references for flows and UI.</p></div>
+        <div class="tile s3"><span class="num">04</span><h3><span class="ru">Тестовый запуск</span><span class="en">Test launch</span></h3><p class="ru">Торговые представители сами пользовались приложением и приносили обратную связь.</p><p class="en">Sales reps used the app themselves and brought back feedback.</p></div>
+      </div>
+      <div class="bento" style="margin-top: var(--gap)">
+        <div class="tile dark s12 insight">
+          <span class="label row"><span class="dot"></span><span class="ru">Главный инсайт</span><span class="en">Key insight</span></span>
+          <p class="quote"><span class="ru">Владельцы магазинов не станут разбираться в новом приложении сами.</span><span class="en">Store owners won't figure out a new app on their own.</span></p>
+          <p class="ru" style="max-width:46em;font-size:16.5px">Поэтому в продукте появилась роль торгового представителя. Он приходит в магазин, помогает зарегистрироваться, добавляет точку в базу и оформляет заказы вместе с владельцем. Приложение входит в работу магазина постепенно, пока заказывать в нём не станет привычкой.</p>
+          <p class="en" style="max-width:46em;font-size:16.5px">So the product gained a sales rep role. A rep visits the store, helps it sign up, adds it to the database and places orders together with the owner. The app works its way into the store's routine gradually, until ordering there becomes a habit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ORDERING -->
+  <section class="block" id="ordering">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">03 <span class="dot"></span> <span class="ru">Заказ</span><span class="en">Ordering</span></span>
+        <div>
+          <h2><span class="ru">Заказ без звонков, от корзины до доставки</span><span class="en">Ordering without calls, from cart to doorstep</span></h2>
+          <p class="ru">Один заказ проходит через четыре роли. Я спроектировала путь так, чтобы каждая сторона видела свой шаг и текущий статус, а заказ ни разу не уходил в звонки и переписку.</p>
+          <p class="en">One order passes through four roles. I designed the journey so every party sees its own step and the current status, and the order never falls back to calls or chat.</p>
+        </div>
+      </div>
+
+      <div class="tile flow">
+        <div class="flow-top">
+          <span class="label"><span class="ru">Путь заказа по ролям</span><span class="en">Order journey by role</span></span>
+          <span class="swipe-hint"><span class="ru">листайте →</span><span class="en">swipe →</span></span>
+          <div class="facts">
+            <span class="fact"><b>4</b> <span class="ru">роли</span><span class="en">roles</span></span>
+            <span class="fact"><b>7</b> <span class="ru">статусов</span><span class="en">statuses</span></span>
+            <span class="fact"><span class="ru">Накладная в приложении</span><span class="en">Invoice in the app</span></span>
+          </div>
+        </div>
+        <div class="lanes-wrap">
+          <div class="lanes" id="lanes">
+            <div class="lane-bg alt" style="grid-column:2"></div>
+            <div class="lane-bg" style="grid-column:3"></div>
+            <div class="lane-bg alt" style="grid-column:4"></div>
+            <div class="lane-bg" style="grid-column:5"></div>
+            <div class="lane-name" style="grid-column:2"><span class="ico">01</span><span><span class="ru">Магазин · менеджер</span><span class="en">Store · manager</span></span></div>
+            <div class="lane-name" style="grid-column:3"><span class="ico">02</span><span><span class="ru">Управляющий</span><span class="en">Owner</span></span></div>
+            <div class="lane-name" style="grid-column:4"><span class="ico">03</span><span><span class="ru">Поставщик</span><span class="en">Supplier</span></span></div>
+            <div class="lane-name" style="grid-column:5"><span class="ico">04</span><span><span class="ru">Курьер</span><span class="en">Courier</span></span></div>
+            <span class="row-num" style="grid-row:2">01</span>
+            <div class="stepc" data-step style="grid-column:2;grid-row:2"><span class="who-tag"><span class="ru">Магазин · менеджер</span><span class="en">Store · manager</span></span><span class="n"><span class="dot"></span><span class="ru">Корзина</span><span class="en">Cart</span></span><b class="ru">Собирает заказ</b><b class="en">Builds the order</b><span class="d ru">и отправляет на утверждение</span><span class="d en">and sends it for approval</span></div>
+            <span class="row-num" style="grid-row:3">02</span>
+            <div class="stepc" data-step style="grid-column:3;grid-row:3"><span class="who-tag"><span class="ru">Управляющий</span><span class="en">Owner</span></span><span class="n"><span class="dot"></span><span class="ru">На утверждении</span><span class="en">Approval</span></span><b class="ru">Утверждает</b><b class="en">Approves</b><span class="d ru">или отклоняет запрос</span><span class="d en">or rejects the request</span></div>
+            <span class="row-num" style="grid-row:4">03</span>
+            <div class="stepc" data-step style="grid-column:4;grid-row:4"><span class="who-tag"><span class="ru">Поставщик</span><span class="en">Supplier</span></span><span class="n"><span class="dot"></span><span class="ru">В обработке</span><span class="en">Processing</span></span><b class="ru">Принимает заказ</b><b class="en">Accepts the order</b><span class="d ru">и собирает товар</span><span class="d en">and picks the goods</span></div>
+            <span class="row-num" style="grid-row:5">04</span>
+            <div class="stepc" data-step style="grid-column:4;grid-row:5"><span class="who-tag"><span class="ru">Поставщик</span><span class="en">Supplier</span></span><span class="n"><span class="dot"></span><span class="ru">Накладная</span><span class="en">Invoice</span></span><b class="ru">Создаёт накладную</b><b class="en">Creates the invoice</b><span class="d ru">прямо в приложении</span><span class="d en">right in the app</span></div>
+            <span class="row-num" style="grid-row:6">05</span>
+            <div class="stepc" data-step style="grid-column:4;grid-row:6"><span class="who-tag"><span class="ru">Поставщик</span><span class="en">Supplier</span></span><span class="n"><span class="dot"></span><span class="ru">Курьер назначен</span><span class="en">Courier assigned</span></span><b class="ru">Назначает курьера</b><b class="en">Assigns a courier</b><span class="d ru">из свободных</span><span class="d en">from those available</span></div>
+            <span class="row-num" style="grid-row:7">06</span>
+            <div class="stepc" data-step style="grid-column:5;grid-row:7"><span class="who-tag"><span class="ru">Курьер</span><span class="en">Courier</span></span><span class="n"><span class="dot"></span><span class="ru">В доставке</span><span class="en">Out for delivery</span></span><b class="ru">Везёт заказ</b><b class="en">Delivers the order</b><span class="d ru">и подтверждает доставку фото</span><span class="d en">and confirms it with a photo</span></div>
+            <span class="row-num" style="grid-row:8">07</span>
+            <div class="stepc final" data-step style="grid-column:2;grid-row:8"><span class="who-tag"><span class="ru">Магазин · менеджер</span><span class="en">Store · manager</span></span><span class="n"><span class="dot"></span><span class="ru">Доставлен</span><span class="en">Delivered</span></span><b class="ru">Оценивает</b><b class="en">Rates</b><span class="d ru">заказ и курьера</span><span class="d en">the order and the courier</span></div>
+            <svg class="flowsvg" aria-hidden="true"><path id="flowpath" d=""/></svg>
+          </div>
+        </div>
+        <p class="flow-note"><span class="dot"></span><span class="ru">Каждая смена статуса видна всем участникам и приходит пуш-уведомлением</span><span class="en">Every status change is visible to all parties and arrives as a push notification</span></p>
+      </div>
+
+      <div class="gallery-wrap">
+        <div class="gallery-bar">
+          <div class="gt"><span class="label"><span class="ru">Экраны заказа</span><span class="en">Ordering screens</span></span><h3><span class="ru">Каждая роль видит свой шаг</span><span class="en">Each role sees its own step</span></h3></div>
+          <div class="arrows">
+            <button class="arrow" type="button" data-dir="-1" aria-label="Назад / Back">←</button>
+            <button class="arrow" type="button" data-dir="1" aria-label="Вперёд / Next">→</button>
+          </div>
+        </div>
+        <div class="gallery">
+          <figure class="screen"><div class="stage"><img class="device" src="img/order-manager.webp" width="828" height="1792" loading="lazy" data-alt-ru="Корзина менеджера с кнопкой «Оформить заказ»" data-alt-en="Manager's cart with the Place order button" alt="Корзина менеджера с кнопкой «Оформить заказ»"></div><figcaption><b class="ru">Менеджер</b><b class="en">Manager</b> <span class="ru">собирает корзину</span><span class="en">builds the cart</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><img class="device" src="img/order-approval.webp" width="828" height="1792" loading="lazy" data-alt-ru="Экран утверждения заказа управляющим со скидкой поставщика" data-alt-en="Owner approval screen with the supplier discount" alt="Экран утверждения заказа управляющим со скидкой поставщика"></div><figcaption><b class="ru">Управляющий</b><b class="en">Owner</b> <span class="ru">утверждает заказ</span><span class="en">approves the order</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><div class="scroll-box"><div class="device scroll"><img src="img/order-invoice.webp" width="828" height="2628" loading="lazy" data-alt-ru="Заказ у поставщика: уведомление «Накладная создана успешно»" data-alt-en="Supplier order view with an “Invoice created” notice" alt="Заказ у поставщика: уведомление «Накладная создана успешно»"></div><span class="hint"><span class="ru">↕ прокрутите</span><span class="en">↕ scroll</span></span></div></div><figcaption><b class="ru">Поставщик</b><b class="en">Supplier</b> <span class="ru">формирует накладную</span><span class="en">generates the invoice</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><img class="device" src="img/order-rate.webp" width="828" height="1792" loading="lazy" data-alt-ru="Оценка доставки: «Как прошла доставка?»" data-alt-en="Delivery rating: “How was the delivery?”" alt="Оценка доставки: «Как прошла доставка?»"></div><figcaption><b class="ru">Магазин</b><b class="en">Store</b> <span class="ru">оценивает доставку</span><span class="en">rates the delivery</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 REDESIGN -->
+  <section class="block" id="redesign">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">04 <span class="dot"></span> <span class="ru">Редизайн</span><span class="en">Redesign</span></span>
+        <div>
+          <h2><span class="ru">Редизайн внутри готовой дизайн-системы</span><span class="en">A redesign that kept the design system</span></h2>
+          <p class="ru">В исходных макетах была слабая навигация, непривычные сценарии и невыразительный интерфейс. Дизайн-систему я сохранила и улучшала путь пользователя внутри неё. Потяните ползунок, чтобы сравнить.</p>
+          <p class="en">The original mockups had weak navigation, unfamiliar flows and a flat UI. I kept the design system intact and improved the user journey within it. Drag the handle to compare.</p>
+        </div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s6 compare-card">
+          <div class="compare" data-compare>
+            <div class="viewport">
+              <div class="layers">
+                <img class="before" src="img/rating-before.webp" width="828" height="1792" loading="lazy" data-alt-ru="Рейтинг до редизайна: общая оценка и простой список отзывов" data-alt-en="Ratings before the redesign: an overall score and a plain list of reviews" alt="Рейтинг до редизайна: общая оценка и простой список отзывов">
+                <img class="after" src="img/rating-after.webp" width="828" height="1792" loading="lazy" data-alt-ru="Рейтинг после редизайна: крупная оценка, распределение по звёздам, лента фото и фильтры" data-alt-en="Ratings after the redesign: a large score, star breakdown, photo strip and filters" alt="Рейтинг после редизайна: крупная оценка, распределение по звёздам, лента фото и фильтры">
+              </div>
+            </div>
+            <span class="tag b"><span class="ru">До</span><span class="en">Before</span></span>
+            <span class="tag a"><span class="ru">После</span><span class="en">After</span></span>
+            <div class="divider"></div>
+            <div class="knob" role="slider" tabindex="0" aria-label="До / после · Before / after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">↔</div>
+          </div>
+          <div class="compare-note">
+            <h3><span class="ru">Рейтинг и отзывы</span><span class="en">Ratings and reviews</span></h3>
+            <p class="ru">Отзывы стали инструментом выбора поставщика: крупная оценка с распределением по звёздам, лента фото из отзывов и фильтры «С фото» и по звёздам.</p>
+            <p class="en">Reviews became a tool for choosing a supplier: a large score with a star breakdown, a strip of review photos, and filters for “With photos” and stars.</p>
+          </div>
+        </div>
+        <div class="tile s6 compare-card">
+          <div class="compare" data-compare>
+            <div class="viewport">
+              <div class="layers">
+                <img class="before" src="img/notif-before.webp" width="828" height="1792" loading="lazy" data-alt-ru="Уведомления до редизайна: однотипный список" data-alt-en="Notifications before the redesign: a uniform list" alt="Уведомления до редизайна: однотипный список">
+                <img class="after" src="img/notif-after.webp" width="828" height="1792" loading="lazy" data-alt-ru="Уведомления после редизайна: номер заказа, статус и действие в карточке" data-alt-en="Notifications after the redesign: order number, status and an action in each card" alt="Уведомления после редизайна: номер заказа, статус и действие в карточке">
+              </div>
+            </div>
+            <span class="tag b"><span class="ru">До</span><span class="en">Before</span></span>
+            <span class="tag a"><span class="ru">После</span><span class="en">After</span></span>
+            <div class="divider"></div>
+            <div class="knob" role="slider" tabindex="0" aria-label="До / после · Before / after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">↔</div>
+          </div>
+          <div class="compare-note">
+            <h3><span class="ru">Уведомления</span><span class="en">Notifications</span></h3>
+            <p class="ru">Вместо однотипного списка у каждого уведомления есть номер заказа, понятный статус и действие прямо в карточке: «Проверить и утвердить» или «Детали заказа».</p>
+            <p class="en">Instead of a uniform list, each notification shows the order number, a clear status and an action right in the card: “Review and approve” or “Order details”.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 SALES -->
+  <section class="block" id="sales">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">05 <span class="dot"></span> <span class="ru">Самое сложное</span><span class="en">The hardest part</span></span>
+        <div>
+          <h2><span class="ru">Торговые представители и своя аналитика</span><span class="en">Sales reps and an analytics tool of our own</span></h2>
+          <p class="ru">Продажи отслеживали в стороннем Dr Sales, заказы жили в Joozim, каталог в админке. Команде приходилось постоянно переключаться. Я спроектировала связку Joozim и Joozim Sales: торговый работает под своим именем, а его действия видны в аналитике.</p>
+          <p class="en">Sales were tracked in a third-party tool, Dr Sales, orders lived in Joozim and the catalog in the admin panel. The team kept switching between them. I designed a link between Joozim and Joozim Sales: a rep works under their own name, and their actions show up in analytics.</p>
+        </div>
+      </div>
+      <div class="bento swipe">
+        <div class="tile s6 eco">
+          <span class="label row"><span class="dot grey"></span><span class="ru">Было · 3 разных инструмента</span><span class="en">Before · 3 separate tools</span></span>
+          <div class="tools">
+            <div class="toolc"><span class="ic">J</span><span><b>Joozim</b><span class="ru">Заказы магазинов</span><span class="en">Store orders</span></span><span class="tag"><span class="ru">приложение</span><span class="en">app</span></span></div>
+            <div class="toolc ext"><span class="ic">Dr</span><span><b>Dr Sales</b><span class="ru">Продажи, обходы, кто скачал и сделал заявку</span><span class="en">Sales, store visits, who installed and ordered</span></span><span class="tag"><span class="ru">сторонний</span><span class="en">third-party</span></span></div>
+            <div class="toolc"><span class="ic">A</span><span><b><span class="ru">Админка</span><span class="en">Admin panel</span></b><span class="ru">Каталог и заказы</span><span class="en">Catalog and orders</span></span><span class="tag"><span class="ru">веб</span><span class="en">web</span></span></div>
+          </div>
+          <p class="switch"><i>⇄</i><span class="ru">Команда постоянно переключалась между тремя окнами</span><span class="en">The team kept switching between three windows</span></p>
+        </div>
+
+        <div class="tile s6 eco">
+          <span class="label row"><span class="dot"></span><span class="ru">Стало · связанная система</span><span class="en">After · one connected system</span></span>
+          <div class="pair">
+            <div class="big app">
+              <div class="head2"><span class="ic">J</span><span><b>Joozim</b><small class="ru">приложение</small><small class="en">the app</small></span></div>
+              <ul>
+                <li><span class="ru">Магазины оформляют заказы</span><span class="en">Stores place orders</span></li>
+                <li><span class="ru">Торговый входит под своим именем</span><span class="en">Reps sign in under their own name</span></li>
+                <li><span class="ru">Визиты, точки и заявки на месте</span><span class="en">Visits, stores and orders on site</span></li>
+              </ul>
+            </div>
+            <div class="wire" aria-hidden="true">
+              <span class="ru">визиты</span><span class="en">visits</span>
+              <span class="ru">точки</span><span class="en">stores</span>
+              <span class="ru">заявки</span><span class="en">orders</span>
+            </div>
+            <div class="big sales">
+              <div class="head2"><span class="ic">S</span><span><b>Joozim Sales</b><small class="ru">аналитика</small><small class="en">analytics</small></span></div>
+              <ul>
+                <li><span class="ru">Только нужные метрики, без лишнего</span><span class="en">Only the metrics that matter</span></li>
+                <li><span class="ru">Активность каждого торгового</span><span class="en">Each rep's activity</span></li>
+                <li><span class="ru">Продажи, частота поставок и обходы</span><span class="en">Sales, delivery frequency and store visits</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bento swipe" style="margin-top: var(--gap)">
+        <div class="tile s6">
+          <span class="label"><span class="ru">Торговый представитель</span><span class="en">Sales rep</span></span>
+          <ul class="feat">
+            <li><span class="dot"></span><span><span class="ru">Задачи на день и итоги дня</span><span class="en">Daily tasks and a daily summary</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Точки на карте и построение маршрута</span><span class="en">Stores on a map and route planning</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Заявка на закуп прямо из задачи</span><span class="en">Purchase orders straight from a task</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Результат визита или причина отказа</span><span class="en">Visit outcome or reason for refusal</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">База торговых точек, начало и конец смены</span><span class="en">Store database, shift start and end</span></span></li>
+          </ul>
+        </div>
+        <div class="tile s6">
+          <span class="label"><span class="ru">Супервайзер</span><span class="en">Supervisor</span></span>
+          <ul class="feat">
+            <li><span class="dot"></span><span><span class="ru">Команда и страница сотрудника</span><span class="en">Team list and employee pages</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Задачи на визиты и заявки</span><span class="en">Assigning visits and orders</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Сотрудники на карте</span><span class="en">Team on a map</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">KPI-показатели</span><span class="en">KPI dashboard</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery-wrap">
+        <div class="gallery-bar">
+          <div class="gt"><span class="label"><span class="ru">Экраны торгового и супервайзера</span><span class="en">Sales rep and supervisor screens</span></span><h3><span class="ru">День торгового в приложении</span><span class="en">A sales rep's day in the app</span></h3></div>
+          <div class="arrows">
+            <button class="arrow" type="button" data-dir="-1" aria-label="Назад / Back">←</button>
+            <button class="arrow" type="button" data-dir="1" aria-label="Вперёд / Next">→</button>
+          </div>
+        </div>
+        <div class="gallery">
+          <figure class="screen"><div class="stage"><img class="device" src="img/rep-tasks.webp" width="828" height="1792" loading="lazy" data-alt-ru="Задачи торгового представителя: визиты и заявки на закуп" data-alt-en="Sales rep tasks: store visits and purchase orders" alt="Задачи торгового представителя: визиты и заявки на закуп"></div><figcaption><span class="ru">Задачи на день</span><span class="en">Tasks for the day</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><img class="device" src="img/rep-map.webp" width="828" height="1792" loading="lazy" data-alt-ru="Карта торговых точек" data-alt-en="Map of stores" alt="Карта торговых точек"></div><figcaption><span class="ru">Точки на карте</span><span class="en">Stores on the map</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><img class="device" src="img/rep-visit.webp" width="828" height="1792" loading="lazy" data-alt-ru="Результат визита: точка готова сделать заказ или отказ" data-alt-en="Visit result: the store is ready to order, or declines" alt="Результат визита: точка готова сделать заказ или отказ"></div><figcaption><span class="ru">Результат визита</span><span class="en">Visit outcome</span></figcaption></figure>
+          <figure class="screen"><div class="stage"><img class="device" src="img/rep-kpi.webp" width="828" height="1792" loading="lazy" data-alt-ru="KPI-показатели: задачи, эффективность, оклад и бонусы" data-alt-en="KPI screen: tasks, efficiency, salary and bonuses" alt="KPI-показатели: задачи, эффективность, оклад и бонусы"></div><figcaption><span class="ru">KPI супервайзера</span><span class="en">Supervisor KPIs</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 GROWTH -->
+  <section class="block" id="growth">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">06 <span class="dot"></span> <span class="ru">Рост базы</span><span class="en">Growth</span></span>
+        <div>
+          <h2><span class="ru">Поводы прийти и остаться</span><span class="en">Reasons to join and stay</span></h2>
+          <p class="ru">Пробовать новое людям лень, поэтому кроме торговых представителей магазины привлекают механики лояльности.</p>
+          <p class="en">People rarely bother trying something new, so besides sales reps, loyalty mechanics bring stores in.</p>
+        </div>
+      </div>
+      <div class="bento swipe">
+        <div class="grow s3">
+          <div class="stage"><img class="device" src="img/growth-referral.webp" width="828" height="1792" loading="lazy" data-alt-ru="Реферальная программа: «Приглашайте организации»" data-alt-en="Referral program: “Invite organizations”" alt="Реферальная программа: «Приглашайте организации»"></div>
+          <div class="txt"><h3><span class="ru">Реферальная программа</span><span class="en">Referral program</span></h3><p class="ru">Магазин приглашает другие организации и видит историю приглашений.</p><p class="en">A store invites other businesses and sees its invitation history.</p></div>
+        </div>
+        <div class="grow s3">
+          <div class="stage"><div class="scroll-box"><div class="device scroll"><img src="img/growth-raffle.webp" width="828" height="3024" loading="lazy" data-alt-ru="Страница розыгрыша: как участвовать в акции и товары каталога" data-alt-en="Prize draw page: how to take part, plus catalog products" alt="Страница розыгрыша: как участвовать в акции и товары каталога"></div><span class="hint"><span class="ru">↕ прокрутите</span><span class="en">↕ scroll</span></span></div></div>
+          <div class="txt"><h3><span class="ru">Розыгрыш призов</span><span class="en">Prize draw</span></h3><p class="ru">Понятные шаги участия и товары, которые приближают к призу.</p><p class="en">Clear steps to take part, and the products that get a store closer to a prize.</p></div>
+        </div>
+        <div class="grow s3">
+          <div class="stage"><img class="device" src="img/growth-reorder.webp" width="828" height="1792" loading="lazy" data-alt-ru="Окно «Купить снова» с товарами из прошлого заказа" data-alt-en="“Buy again” sheet with items from a past order" alt="Окно «Купить снова» с товарами из прошлого заказа"></div>
+          <div class="txt"><h3><span class="ru">Купить снова</span><span class="en">Buy again</span></h3><p class="ru">Прошлый заказ повторяется в пару нажатий прямо с главной.</p><p class="en">A past order repeats in a couple of taps right from home.</p></div>
+        </div>
+        <div class="grow s3">
+          <div class="stage"><img class="device" src="img/growth-discount.webp" width="828" height="1792" loading="lazy" data-alt-ru="Корзина с прогрессом до скидки поставщика" data-alt-en="Cart showing progress toward a supplier discount" alt="Корзина с прогрессом до скидки поставщика"></div>
+          <div class="txt"><h3><span class="ru">Скидки поставщика</span><span class="en">Supplier discounts</span></h3><p class="ru">Прямо в корзине видно, сколько осталось до следующей скидки.</p><p class="en">The cart shows how much is left until the next discount tier.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 VISUALS -->
+  <section class="block" id="visuals">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">07 <span class="dot"></span> <span class="ru">Визуал</span><span class="en">Visuals</span></span>
+        <div>
+          <h2><span class="ru">Баннеры, иллюстрации и печать</span><span class="en">Banners, illustrations and print</span></h2>
+          <p class="ru">Я сделала баннеры и иллюстрации для приложения, а также каталог и баннеры для печати.</p>
+          <p class="en">I made the in-app banners and illustrations, plus a print catalog and print banners.</p>
+        </div>
+      </div>
+      <div class="bento swipe">
+        <div class="visual s6"><img src="img/banner-1.webp" width="764" height="464" loading="lazy" alt="Баннер «Основа вкуса ваших блюд»"></div>
+        <div class="visual s6"><img src="img/banner-2.webp" width="764" height="464" loading="lazy" alt="Баннер «Запас энергии для команды»"></div>
+      </div>
+      <div class="bento" style="margin-top: var(--gap)">
+        <div class="visual strip s12"><img src="img/tiles-1.webp" width="1966" height="428" loading="lazy" alt="Плитки подборок на главном экране"></div>
+        <div class="visual strip s12"><img src="img/tiles-2.webp" width="1966" height="428" loading="lazy" alt="Плитки подборок на главном экране"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 RESULTS -->
+  <section class="block" id="results">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">08 <span class="dot"></span> <span class="ru">Результаты</span><span class="en">Results</span></span>
+        <div>
+          <h2><span class="ru">Первые три месяца в Талдыкоргане</span><span class="en">The first three months in Taldykorgan</span></h2>
+          <p class="ru">Сейчас приложение работает в Талдыкоргане, ниже аналитика по городу. Первые заказы пошли 17 сентября, с конца октября в пиковые дни магазины оформляют 30 заказов и больше, а 16 ноября был рекорд: 37 заказов за день.</p>
+          <p class="en">The app currently runs in Taldykorgan; below are the city's numbers. The first orders came on September 17, since late October peak days reach 30 orders or more, and November 16 set the record at 37 orders in a day.</p>
+        </div>
+      </div>
+      <div class="bento">
+        <div class="tile s12" style="padding: clamp(24px, 3vw, 36px)">
+          <div class="metrics light">
+            <div class="metric"><b>414</b><span class="ru">заказов оформлено</span><span class="en">orders placed</span></div>
+            <div class="metric"><b>6 238 728<small>₸</small></b><span class="ru">оборот по всем заказам</span><span class="en">total order value</span></div>
+            <div class="metric"><b>310</b><span class="ru">магазинов в системе</span><span class="en">stores onboarded</span></div>
+          </div>
+        </div>
+
+        <div class="tile s12 chart-card">
+          <div class="chart-top">
+            <div style="display:grid;gap:6px">
+              <span class="label"><span class="ru">Заказы по дням · 20.08–17.11.2026</span><span class="en">Orders per day · Aug 20 – Nov 17, 2026</span></span>
+              <h3><span class="ru">Динамика заказов</span><span class="en">Orders over time</span></h3>
+            </div>
+            <span class="legend"><i></i><span class="ru">заказов в день</span><span class="en">orders per day</span></span>
+          </div>
+          <div class="chart" id="chart"><div class="tip" id="tip"></div></div>
+          <details class="table">
+            <summary><span class="ru">Показать данные таблицей</span><span class="en">Show data as a table</span></summary>
+            <table id="chart-table"><thead><tr><th><span class="ru">Дата</span><span class="en">Date</span></th><th><span class="ru">Заказы</span><span class="en">Orders</span></th></tr></thead><tbody></tbody></table>
+          </details>
+          <p class="cap" style="text-align:left"><span class="ru">Источник: админ-панель Joozim, Талдыкорган</span><span class="en">Source: Joozim admin panel, Taldykorgan</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 TEAM -->
+  <section class="block" id="team">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">09 <span class="dot"></span> <span class="ru">Команда</span><span class="en">Team</span></span>
+        <h2><span class="ru">Кто делал Joozim</span><span class="en">The team behind Joozim</span></h2>
+      </div>
+      <div class="bento">
+        <div class="tile s6 member lead-card">
+          <span class="label row"><span class="dot"></span><span class="ru">Я · UX/UI-дизайнер</span><span class="en">Me · UX/UI designer</span></span>
+          <h3><span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></h3>
+          <ul class="list">
+            <li><span class="dot"></span><span><span class="ru">Исследование и анализ конкурентов</span><span class="en">Research and competitor analysis</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Сценарии и логика для всех ролей</span><span class="en">Flows and logic for every role</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Редизайн, навигация и интерфейс всего приложения</span><span class="en">Redesign, navigation and UI for the whole app</span></span></li>
+            <li><span class="dot"></span><span><span class="ru">Баннеры, иллюстрации, каталог и баннеры для печати</span><span class="en">Banners, illustrations, print catalog and print banners</span></span></li>
+          </ul>
+        </div>
+        <div class="s6" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)">
+          <div class="tile member"><span class="role"><span class="ru">Разработка</span><span class="en">Engineering</span></span><h3><span class="ru">Фронтенд-разработчик</span><span class="en">Front-end developer</span></h3></div>
+          <div class="tile member"><span class="role"><span class="ru">Разработка</span><span class="en">Engineering</span></span><h3><span class="ru">Бэкенд-разработчик</span><span class="en">Back-end developer</span></h3></div>
+          <div class="tile member"><span class="role"><span class="ru">Контент</span><span class="en">Content</span></span><h3><span class="ru">AI-креаторы</span><span class="en">AI creators</span></h3></div>
+          <div class="tile member"><span class="role"><span class="ru">Руководство</span><span class="en">Leadership</span></span><h3><span class="ru">Техлид</span><span class="en">Tech lead</span></h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="label row sec"><span class="dot"></span><span class="ru">Контакты</span><span class="en">Contact</span></span>
+      <h2><span class="ru">Дана Орынбетова<i>.</i><br>UX/UI-дизайнер</span><span class="en">Dana Orynbetova<i>.</i><br>UX/UI designer</span></h2>
+      <div class="links">
+        <a class="btn solid" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram <small>@orynbetova</small></a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/%D0%B4%D0%B0%D0%BD%D0%B0-%D0%BE%D1%80%D1%8B%D0%BD%D0%B1%D0%B5%D1%82%D0%BE%D0%B2%D0%B0-54a24b240" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
+        <a class="btn ghost" href="https://www.behance.net/orynbetova" target="_blank" rel="noopener">Behance <span class="arr">↗</span></a>
+        <a class="btn ghost" href="mailto:orynbetova777@gmail.com">orynbetova777@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap line">
+    <span class="who"><span class="dot name"></span>© 2026 <span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></span>
+    <span>Joozim · <a href="https://joozim.kz/" target="_blank" rel="noopener">joozim.kz</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var titles = { ru: "Кейс Joozim · Дана Орынбетова", en: "Joozim case study · Dana Orynbetova" };
+  var lang = "ru";
+
+  function apply(l) {
+    lang = l;
+    root.setAttribute("data-lang", l);
+    root.setAttribute("lang", l);
+    document.title = titles[l];
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === l));
+    });
+    document.querySelectorAll("img[data-alt-" + l + "]").forEach(function (img) {
+      img.alt = img.getAttribute("data-alt-" + l);
+    });
+    if (window.__drawFlow) requestAnimationFrame(window.__drawFlow);
+  }
+  function initial() {
+    var h = (location.hash || "").replace("#", "");
+    if (h === "en" || h === "ru") return h;
+    try { var q = new URLSearchParams(location.search).get("lang"); if (q === "en" || q === "ru") return q; } catch (e) {}
+    try { var s = localStorage.getItem("case-lang"); if (s === "en" || s === "ru") return s; } catch (e) {}
+    return /^(ru|kk|uk|be)/.test((navigator.language || "ru").toLowerCase()) ? "ru" : "en";
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set-lang");
+      apply(l);
+      try { localStorage.setItem("case-lang", l); } catch (e) {}
+      try { history.replaceState(null, "", "#" + l); } catch (e) {}
+    });
+  });
+  window.addEventListener("hashchange", function () {
+    var h = location.hash.replace("#", "");
+    if (h === "en" || h === "ru") apply(h);
+  });
+
+  /* section nav */
+  document.querySelectorAll("[data-go]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.getAttribute("data-go"));
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  document.querySelector(".me").addEventListener("click", function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  /* scroll progress */
+  var bar = document.querySelector(".progress");
+  function prog() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.setProperty("--p", max > 0 ? Math.min(1, scrollY / max) : 0);
+  }
+  addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
+
+  /* order flow connector */
+  var lanes = document.getElementById("lanes");
+  var path = document.getElementById("flowpath");
+  function drawFlow() {
+    var base = lanes.getBoundingClientRect();
+    var cards = Array.prototype.slice.call(lanes.querySelectorAll("[data-step]"));
+    var d = "";
+    for (var i = 0; i < cards.length - 1; i++) {
+      var a = cards[i].getBoundingClientRect(), b = cards[i + 1].getBoundingClientRect();
+      var ax = a.left + a.width / 2 - base.left, ay = a.bottom - base.top;
+      var bx = b.left + b.width / 2 - base.left, by = b.top - base.top;
+      if (Math.abs(ax - bx) < 2) { d += "M" + ax + " " + ay + "V" + by; continue; }
+      var my = (ay + by) / 2, r = Math.min(10, Math.abs(by - ay) / 2, Math.abs(bx - ax) / 2), s = bx > ax ? 1 : -1;
+      d += "M" + ax + " " + ay + "V" + (my - r) + "Q" + ax + " " + my + " " + (ax + s * r) + " " + my +
+           "H" + (bx - s * r) + "Q" + bx + " " + my + " " + bx + " " + (my + r) + "V" + by;
+    }
+    path.setAttribute("d", d);
+  }
+  window.__drawFlow = drawFlow;
+  try { new ResizeObserver(function () { drawFlow(); }).observe(lanes); } catch (e) {}
+  addEventListener("resize", drawFlow);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawFlow);
+  addEventListener("load", drawFlow);
+
+  /* galleries */
+  document.querySelectorAll(".gallery-wrap").forEach(function (w) {
+    var g = w.querySelector(".gallery"), prev = w.querySelector('[data-dir="-1"]'), next = w.querySelector('[data-dir="1"]');
+    function upd() {
+      prev.disabled = g.scrollLeft <= 4;
+      next.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4;
+      w.querySelector(".arrows").style.display = g.scrollWidth > g.clientWidth + 4 ? "flex" : "none";
+    }
+    [prev, next].forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = g.querySelector(".screen");
+        var step = card ? card.getBoundingClientRect().width + 12 : 280;
+        g.scrollBy({ left: step * Number(btn.getAttribute("data-dir")), behavior: "smooth" });
+      });
+    });
+    g.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); upd();
+  });
+
+  /* scroll hints */
+  document.querySelectorAll(".scroll-box").forEach(function (box) {
+    var d = box.querySelector(".device.scroll");
+    d.addEventListener("scroll", function () { if (d.scrollTop > 8) box.classList.add("scrolled"); }, { passive: true });
+  });
+
+  /* before / after */
+  document.querySelectorAll("[data-compare]").forEach(function (c) {
+    var knob = c.querySelector(".knob"), pos = 50, dragging = false;
+    function set(p) {
+      pos = Math.max(0, Math.min(100, p));
+      c.style.setProperty("--pos", pos + "%");
+      knob.setAttribute("aria-valuenow", String(Math.round(pos)));
+    }
+    function fromEvent(e) { var r = c.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); }
+    knob.addEventListener("pointerdown", function (e) { dragging = true; knob.setPointerCapture(e.pointerId); e.preventDefault(); });
+    knob.addEventListener("pointermove", function (e) { if (dragging) fromEvent(e); });
+    knob.addEventListener("pointerup", function () { dragging = false; });
+    knob.addEventListener("pointercancel", function () { dragging = false; });
+    knob.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { set(pos - 5); e.preventDefault(); }
+      if (e.key === "ArrowRight") { set(pos + 5); e.preventDefault(); }
+      if (e.key === "Home") { set(0); e.preventDefault(); }
+      if (e.key === "End") { set(100); e.preventDefault(); }
+    });
+    c.querySelector(".viewport").addEventListener("click", fromEvent);
+  });
+
+  /* orders chart: daily orders from the Joozim admin panel, Taldykorgan (sum = 414) */
+  var data = {"2026-09-17":3,"2026-09-18":1,"2026-09-19":1,"2026-09-21":12,"2026-09-22":3,"2026-09-23":3,"2026-09-28":3,"2026-09-29":4,"2026-10-01":7,"2026-10-05":8,"2026-10-06":3,"2026-10-07":8,"2026-10-08":6,"2026-10-09":7,"2026-10-12":7,"2026-10-13":2,"2026-10-14":8,"2026-10-15":6,"2026-10-16":3,"2026-10-19":4,"2026-10-20":1,"2026-10-21":3,"2026-10-22":4,"2026-10-23":5,"2026-10-26":13,"2026-10-27":30,"2026-10-28":19,"2026-10-29":13,"2026-10-30":12,"2026-11-02":19,"2026-11-03":30,"2026-11-04":25,"2026-11-05":13,"2026-11-06":11,"2026-11-09":18,"2026-11-10":10,"2026-11-11":12,"2026-11-12":21,"2026-11-13":9,"2026-11-16":37,"2026-11-17":10};
+  var days = [];
+  var start = new Date(Date.UTC(2026, 7, 20));
+  for (var i = 0; i < 90; i++) {
+    var dt = new Date(start.getTime() + i * 864e5);
+    var key = dt.toISOString().slice(0, 10);
+    days.push({ d: dt, key: key, v: data[key] || 0 });
+  }
+  var mon = { ru: ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"], en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] };
+  function fmt(d, l) { return l === "ru" ? d.getUTCDate() + " " + mon.ru[d.getUTCMonth()] : mon.en[d.getUTCMonth()] + " " + d.getUTCDate(); }
+  var tb = document.querySelector("#chart-table tbody");
+  days.filter(function (x) { return x.v > 0; }).forEach(function (x) {
+    var tr = document.createElement("tr");
+    tr.innerHTML = '<td><span class="ru">' + fmt(x.d, "ru") + '</span><span class="en">' + fmt(x.d, "en") + "</span></td><td>" + x.v + "</td>";
+    tb.appendChild(tr);
+  });
+
+  var holder = document.getElementById("chart"), tip = document.getElementById("tip");
+  var NS = "http://www.w3.org/2000/svg";
+  function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function drawChart() {
+    var old = holder.querySelector("svg"); if (old) old.remove();
+    var W = Math.max(320, holder.clientWidth), H = W < 600 ? 220 : 280;
+    var m = { l: 28, r: 8, t: 26, b: 28 };
+    var iw = W - m.l - m.r, ih = H - m.t - m.b, max = 40;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Orders per day" });
+    var grid = el("g", { "class": "grid" }), axis = el("g", { "class": "axis" });
+    [0, 10, 20, 30, 40].forEach(function (t) {
+      var y = m.t + ih - (t / max) * ih;
+      grid.appendChild(el("line", { x1: m.l, x2: W - m.r, y1: y, y2: y }));
+      var tx = el("text", { x: m.l - 8, y: y + 4, "text-anchor": "end" }); tx.textContent = t; axis.appendChild(tx);
+    });
+    svg.appendChild(grid);
+    var bw = iw / days.length, w = Math.max(2, bw * 0.62);
+    var peakV = Math.max.apply(null, days.map(function (x) { return x.v; }));
+    var bars = el("g", {});
+    days.forEach(function (x, i) {
+      var cx = m.l + bw * i + bw / 2;
+      if (x.v > 0) {
+        var h = (x.v / max) * ih, y = m.t + ih - h, r = Math.min(4, w / 2, h);
+        var p = "M" + (cx - w / 2) + " " + (m.t + ih) + "V" + (y + r) + "Q" + (cx - w / 2) + " " + y + " " + (cx - w / 2 + r) + " " + y +
+                "H" + (cx + w / 2 - r) + "Q" + (cx + w / 2) + " " + y + " " + (cx + w / 2) + " " + (y + r) + "V" + (m.t + ih) + "Z";
+        bars.appendChild(el("path", { d: p, "class": x.v === peakV ? "bar peak-bar" : "bar" }));
+      }
+      if (i % (W < 600 ? 28 : 14) === 0) { var t = el("text", { x: cx, y: H - 8, "text-anchor": "middle" }); t.textContent = fmt(x.d, lang); axis.appendChild(t); }
+      var hit = el("rect", { x: m.l + bw * i, y: m.t, width: bw, height: ih, "class": "hit" });
+      hit.addEventListener("pointerenter", function () {
+        tip.innerHTML = "<b>" + x.v + "</b> " + (lang === "ru" ? "заказов" : "orders") + "<small>" + fmt(x.d, lang) + "</small>";
+        var hh = (x.v / max) * ih;
+        tip.style.left = (cx / W * 100) + "%";
+        tip.style.top = (m.t + ih - hh) + "px";
+        tip.classList.add("on");
+      });
+      hit.addEventListener("pointerleave", function () { tip.classList.remove("on"); });
+      bars.appendChild(hit);
+    });
+    svg.appendChild(bars);
+    svg.appendChild(axis);
+    // peak annotation
+    var pi = 0; days.forEach(function (x, i) { if (x.v > days[pi].v) pi = i; });
+    var px = m.l + bw * pi + bw / 2, py = m.t + ih - (days[pi].v / max) * ih;
+    var g = el("g", { "class": "peak" });
+    var lbl = el("text", { x: px - 6, y: py - 10, "text-anchor": "end" });
+    lbl.textContent = (lang === "ru" ? "рекорд · " : "record · ") + days[pi].v;
+    g.appendChild(lbl);
+    svg.appendChild(g);
+    holder.appendChild(svg);
+  }
+  window.__drawChart = drawChart;
+  addEventListener("resize", drawChart);
+
+  apply(initial());
+  drawChart();
+  drawFlow();
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) { b.addEventListener("click", drawChart); });
+})();
+</script>
+</body>
+</html>
