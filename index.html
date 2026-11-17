@@ -95,7 +95,8 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 .btn.ghost { background: transparent; }
 .btn:hover { transform: translateY(-1px); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
-.btn .arr { font-family: var(--mono); font-size: 15px; opacity: .7; }
+.btn .arr { flex: none; transition: transform .25s ease; }
+.btn:hover .arr { transform: translate(2px, -2px); }
 .btn small { font: 400 13.5px/1 var(--mono); opacity: .6; }
 
 
@@ -263,12 +264,12 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
           <h1><span class="hello"><span class="ru">Привет, я</span><span class="en">Hi, I'm</span></span><span class="ru"><span class="first"><span class="bigdot" aria-hidden="true"></span>Дана</span><br><span class="last">Орынбетова</span></span><span class="en"><span class="first"><span class="bigdot" aria-hidden="true"></span>Dana</span><br><span class="last">Orynbetova</span></span></h1>
           <p class="lead"><span class="ru">Проектирую мобильные приложения и сайты, которыми пользуются в реальной жизни: от исследований и сценариев до дизайн-системы и контроля вёрстки. Люблю продукты, где интерфейс решает настоящую задачу бизнеса.</span><span class="en">I design mobile apps and websites people use in real life, from research and flows to design systems and build review. I like products where the interface solves a real business problem.</span></p>
           <div class="actions">
-            <a class="btn solid" href="#cases"><span class="ru">Смотреть кейсы</span><span class="en">See case studies</span> <span class="arr">↓</span></a>
-            <a class="btn ghost" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram <small>@orynbetova</small></a>
+            <a class="btn solid" href="#cases"><span class="ru">Смотреть кейсы</span><span class="en">See case studies</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn ghost" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram</a>
           </div>
         </div>
         <dl class="facts">
-          <div><dt><span class="ru">Опыт</span><span class="en">Experience</span></dt><dd><span class="ru">4+ года в UX/UI</span><span class="en">4+ years in UX/UI</span></dd></div>
+          <div><dt><span class="ru">Опыт</span><span class="en">Experience</span></dt><dd><span class="ru">4+ года в UX/UI и в веб-дизайне</span><span class="en">4+ years in UX/UI and web design</span></dd></div>
           <div><dt><span class="ru">Фокус</span><span class="en">Focus</span></dt><dd><span class="ru">Мобильные приложения, B2B и B2C</span><span class="en">Mobile apps, B2B and B2C</span></dd></div>
         </dl>
       </div>
@@ -337,7 +338,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
         <div><h2><span class="ru">Продукты, которые уже работают</span><span class="en">Products already in use</span></h2><p class="ru">Оба приложения запущены в App Store и Google Play. В кейсах: исследование, решения и цифры после запуска.</p><p class="en">Both apps are live on the App Store and Google Play. Each case covers research, decisions and post-launch numbers.</p></div>
       </div>
       <div class="cases swipe">
-        <a class="case joozim rv" href="joozim/">
+        <a class="case joozim" href="joozim/">
           <div class="case-stage" aria-hidden="true">
             <div class="ph l"><img src="joozim/img/order-manager.webp" alt="" loading="lazy"></div>
             <div class="ph c"><img src="joozim/img/home-full.webp" alt="" loading="lazy"></div>
@@ -355,7 +356,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
             </div>
           </div>
         </a>
-        <a class="case qt rv" href="qazaq-travel/">
+        <a class="case qt" href="qazaq-travel/">
           <div class="case-stage" aria-hidden="true">
             <div class="ph l"><img src="qazaq-travel/img/offline.webp" alt="" loading="lazy"></div>
             <div class="ph c"><img src="qazaq-travel/img/home.webp" alt="" loading="lazy"></div>
@@ -387,9 +388,9 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
       <span class="label row sec"><span class="dot"></span><span class="ru">Контакты</span><span class="en">Contact</span></span>
       <h2><span class="ru">Давайте сделаем<br>что-то полезное</span><span class="en">Let's build<br>something useful</span></h2>
       <div class="links">
-        <a class="btn solid" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram <small>@orynbetova</small></a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/%D0%B4%D0%B0%D0%BD%D0%B0-%D0%BE%D1%80%D1%8B%D0%BD%D0%B1%D0%B5%D1%82%D0%BE%D0%B2%D0%B0-54a24b240" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
-        <a class="btn ghost" href="https://www.behance.net/orynbetova" target="_blank" rel="noopener">Behance <span class="arr">↗</span></a>
+        <a class="btn solid" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/%D0%B4%D0%B0%D0%BD%D0%B0-%D0%BE%D1%80%D1%8B%D0%BD%D0%B1%D0%B5%D1%82%D0%BE%D0%B2%D0%B0-54a24b240" target="_blank" rel="noopener">LinkedIn <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn ghost" href="https://www.behance.net/orynbetova" target="_blank" rel="noopener">Behance <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn ghost" href="mailto:orynbetova777@gmail.com">orynbetova777@gmail.com</a>
       </div>
     </div>
