@@ -65,7 +65,7 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 /* header */
 .top { position: sticky; top: 0; z-index: 30; background: rgb(243 243 245 / .78); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid rgb(19 19 23 / .06); }
 .top-in { max-width: var(--wrap); margin: 0 auto; padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.me { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1 var(--body); text-decoration: none; }
+.me { display: inline-flex; align-items: center; gap: 10px; font: 600 16px/1 var(--display); letter-spacing: -.01em; text-decoration: none; }
 .me .dot { align-self: center; }
 .me > span:not(.dot) { display: inline-flex; align-items: center; line-height: 1; }
 .nav { display: flex; gap: 4px; }
@@ -86,17 +86,17 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 .hello { display: block; font: 500 clamp(22px, 2.4vw, 32px)/1.1 var(--display); letter-spacing: -.02em; color: var(--muted); margin-bottom: clamp(10px, 1.4vw, 18px); }
 .hero h1 { font-size: var(--t-hero); line-height: 1.04; letter-spacing: -.055em; margin-top: 26px; }
 .hero h1 .first { display: inline-flex; align-items: center; gap: .16em; }
-.hero h1 .last { display: inline-block; padding-left: .48em; }
+.hero h1 .last { display: inline-block; }
 .bigdot { width: .32em; height: .32em; border-radius: 50%; background: var(--accent); flex: none; transform: translateY(.04em); }
 .lead { font-size: var(--t-lead); line-height: 1.5; max-width: 30em; color: var(--ink-soft); margin-top: 26px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; text-decoration: none; font: 500 15px/1 var(--body); border: 1px solid var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 19px 30px; border-radius: 999px; text-decoration: none; font: 500 17px/1 var(--body); border: 1px solid var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease; }
 .btn.solid { background: var(--ink); color: #fff; }
 .btn.ghost { background: transparent; }
 .btn:hover { transform: translateY(-1px); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
-.btn .arr { font-family: var(--mono); font-size: 13px; opacity: .7; }
-.btn small { font: 400 12px/1 var(--mono); opacity: .6; }
+.btn .arr { font-family: var(--mono); font-size: 15px; opacity: .7; }
+.btn small { font: 400 13.5px/1 var(--mono); opacity: .6; }
 
 
 .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); margin: 0; }
@@ -208,6 +208,10 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
   .head > .label { padding-top: 0; }
   .photo { aspect-ratio: 4 / 4.6; }
   .job { grid-template-columns: 1fr; gap: 4px; }
+  .hero .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hero .actions .btn { padding: 18px 12px; font-size: 16px; white-space: nowrap; }
+  .hero .actions .btn small { display: none; }
+  .links .btn { padding: 17px 22px; font-size: 16px; }
   .facts > div { padding: 16px; gap: 10px; }
   .facts dd { font-size: 17px; }
   .tool { font-size: 14px; }
@@ -236,7 +240,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
 
 <header class="top">
   <div class="top-in">
-    <a class="me" href="#top"><span class="dot name"></span><span class="ru">Дана Орынбетова</span><span class="en">Dana Orynbetova</span></a>
+    <a class="me" href="#top"><span class="ru">Портфолио</span><span class="en">Portfolio</span></a>
     <nav class="nav" aria-label="Разделы / Sections">
       <a href="#about"><span class="ru">Опыт</span><span class="en">Experience</span></a>
       <a href="#cases"><span class="ru">Кейсы</span><span class="en">Case studies</span></a>
