@@ -109,7 +109,7 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 .photo img { display: block; width: 100%; height: auto; aspect-ratio: 344 / 418; object-fit: cover; object-position: 50% 30%; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
 .photo:hover img { transform: scale(1.04); }
 .hero h1 { margin-top: 0; }
-.bigline { display: flex; align-items: center; gap: .16em; min-height: 1.1em; margin-top: clamp(8px, 1vw, 14px); font-size: var(--t-hero); line-height: 1.04; letter-spacing: -.055em; white-space: nowrap; }
+.bigline { letter-spacing: -.035em !important; display: flex; align-items: center; gap: .16em; min-height: 1.1em; margin-top: clamp(8px, 1vw, 14px); font-size: clamp(44px, 5.4vw, 72px); line-height: 1.04; letter-spacing: -.055em; white-space: nowrap; }
 .bigline .tw-cursor { width: max(3px, .045em); height: .78em; margin-left: .04em; }
 /* dropdown */
 .dd { position: relative; display: inline-block; }
@@ -237,7 +237,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
   .head > .label, .head > :last-child { grid-column: 1 / -1; }
   .head > .label { padding-top: 0; }
   .photo { width: 150px; border-radius: 24px; }
-  .bigline { font-size: clamp(32px, 9.4vw, 60px); }
+  .bigline { font-size: clamp(30px, 9.4vw, 52px); }
   .dd-menu .dd-opt { font-size: 15px; }
   .job { grid-template-columns: 1fr; gap: 4px; }
   .hero .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -289,7 +289,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
       <div class="hero-text">
         <div>
           <h1 class="in-up" style="--d:.1s"><span class="hello"><span class="ru">Привет! Я Дана, UX/UI-дизайнер</span><span class="en">Hi! I'm Dana, a UX/UI designer</span></span><span class="bigline" aria-hidden="true"><span class="bigdot"></span><span class="tw-word"></span><span class="tw-cursor"></span></span></h1>
-          <p class="lead in-up" style="--d:.3s"><span class="ru">Проектирую <span class="dd"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Что проектирую"><span class="dd-val">мобильные приложения</span><svg class="chev" width="22" height="22" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="dd-menu" role="listbox" hidden><span class="dd-opt" role="option" data-i="0" aria-selected="true">мобильные приложения</span><span class="dd-opt" role="option" data-i="1" aria-selected="false">сайты и лендинги</span><span class="dd-opt" role="option" data-i="2" aria-selected="false">B2B-сервисы</span></span></span>, которыми пользуются в реальной жизни: от исследований и сценариев до дизайн-системы и контроля вёрстки. Люблю продукты, где интерфейс решает настоящую задачу бизнеса.</span><span class="en">I design <span class="dd"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="What I design"><span class="dd-val">mobile apps</span><svg class="chev" width="22" height="22" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="dd-menu" role="listbox" hidden><span class="dd-opt" role="option" data-i="0" aria-selected="true">mobile apps</span><span class="dd-opt" role="option" data-i="1" aria-selected="false">websites and landing pages</span><span class="dd-opt" role="option" data-i="2" aria-selected="false">B2B services</span></span></span> people use in real life, from research and flows to design systems and build review. I like products where the interface solves a real business problem.</span></p>
+          <p class="lead in-up" style="--d:.3s"><span class="ru">Проектирую <span class="dd"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Что проектирую"><span class="dd-val">приложения</span><svg class="chev" width="22" height="22" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="dd-menu" role="listbox" hidden><span class="dd-opt" role="option" data-i="0" aria-selected="true">приложения</span><span class="dd-opt" role="option" data-i="1" aria-selected="false">сайты и лендинги</span><span class="dd-opt" role="option" data-i="2" aria-selected="false">B2B-сервисы</span></span></span>, которыми пользуются в реальной жизни: от исследований и сценариев до дизайн-системы и контроля вёрстки. Люблю продукты, где интерфейс решает настоящую задачу бизнеса.</span><span class="en">I design <span class="dd"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="What I design"><span class="dd-val">apps</span><svg class="chev" width="22" height="22" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="dd-menu" role="listbox" hidden><span class="dd-opt" role="option" data-i="0" aria-selected="true">apps</span><span class="dd-opt" role="option" data-i="1" aria-selected="false">websites and landing pages</span><span class="dd-opt" role="option" data-i="2" aria-selected="false">B2B services</span></span></span> people use in real life, from research and flows to design systems and build review. I like products where the interface solves a real business problem.</span></p>
           <div class="actions in-up" style="--d:.5s">
             <a class="btn solid" href="#cases"><span class="ru">Смотреть кейсы</span><span class="en">See case studies</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <a class="btn ghost" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram</a>
@@ -464,8 +464,8 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
 
   /* typewriter */
   var words = {
-    ru: ["Понятный UX.", "Рост метрик.", "Быстрый запуск.", "Дизайн с ИИ."],
-    en: ["Clear UX.", "Better metrics.", "Fast launch.", "AI-driven."]
+    ru: ["ПОНЯТНЫЙ UX", "ДИЗАЙН С ИИ", "РОСТ МЕТРИК", "ЧИСТЫЙ UI", "UX ПО ДАННЫМ"],
+    en: ["CLEAR UX", "AI-DRIVEN", "BETTER METRICS", "CLEAN UI", "DATA-DRIVEN UX"]
   };
   var tw = document.querySelector(".tw-word");
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
