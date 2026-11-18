@@ -105,9 +105,18 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 .facts dt { display: flex; align-items: center; gap: 8px; font: 500 13px/1.3 var(--mono); color: var(--muted); }
 .facts dt::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 .facts dd { margin: 0; font: 600 clamp(20px, 1.9vw, 26px)/1.2 var(--display); letter-spacing: -.015em; }
-.photo { grid-column: 8 / span 5; position: relative; margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--stage); min-height: 520px; }
-.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transform: scale(1.03); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
-.photo:hover img { transform: scale(1.06); }
+.photo { grid-column: 9 / span 4; align-self: center; justify-self: end; width: 100%; max-width: 380px; margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--stage); }
+.photo img { display: block; width: 100%; height: auto; aspect-ratio: 344 / 418; object-fit: cover; object-position: 50% 28%; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.photo:hover img { transform: scale(1.04); }
+/* typewriter */
+.typed { display: flex; align-items: center; min-height: 1.3em; margin-top: clamp(14px, 1.6vw, 22px); font: 500 clamp(22px, 2.4vw, 32px)/1.2 var(--display); letter-spacing: -.02em; color: var(--ink-soft); }
+.tw-cursor { display: inline-block; width: 3px; height: .9em; margin-left: 4px; border-radius: 1px; background: var(--accent); animation: blink 1.06s step-end infinite; }
+@keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+/* hero entrance */
+.in-up { opacity: 0; transform: translateY(22px); animation: inUp .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: var(--d, 0s); }
+@keyframes inUp { to { opacity: 1; transform: none; } }
+.photo.in-pop { opacity: 0; transform: translateY(26px) scale(.96); animation: inPop 1.1s cubic-bezier(.2,.7,.2,1) .25s forwards; }
+@keyframes inPop { to { opacity: 1; transform: none; } }
 .photo figcaption { position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 18px; background: rgb(255 255 255 / .72); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); font: 500 14px/1.35 var(--body); }
 .photo figcaption .label { font-size: 12px; }
 
@@ -151,9 +160,9 @@ section.block { padding: clamp(72px, 9vw, 128px) 0 0; scroll-margin-top: 70px; }
 
 /* cases */
 .cases { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
-.case { grid-column: span 6; display: grid; grid-template-rows: auto 1fr; background: var(--card); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; border: 1px solid rgb(19 19 23 / .04); transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
+.case { grid-column: span 12; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: stretch; background: var(--card); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; border: 1px solid rgb(19 19 23 / .04); transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
 .case:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -36px rgb(19 19 23 / .35); }
-.case-stage { position: relative; height: clamp(340px, 34vw, 440px); background: var(--stage); margin: 10px 10px 0; border-radius: calc(var(--r-lg) - 8px); overflow: hidden; }
+.case-stage { order: 2; position: relative; height: clamp(360px, 36vw, 460px); background: var(--stage); margin: 10px; border-radius: calc(var(--r-lg) - 8px); overflow: hidden; }
 .case-stage::before { content: ""; position: absolute; left: 50%; top: 58%; width: 70%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, var(--glow), transparent); opacity: .5; filter: blur(10px); }
 .case.joozim { --glow: rgb(255 184 0 / .55); --brand: var(--joozim); }
 .case.qt { --glow: rgb(230 74 52 / .4); --brand: var(--qt); }
@@ -165,7 +174,7 @@ section.block { padding: clamp(72px, 9vw, 128px) 0 0; scroll-margin-top: 70px; }
 .case:hover .ph.c { transform: translateY(-10px); }
 .case:hover .ph.l { transform: rotate(-9deg) translate(-8px, 4px); }
 .case:hover .ph.r { transform: rotate(9deg) translate(8px, 4px); }
-.case-body { display: grid; gap: 14px; align-content: start; padding: clamp(22px, 2.6vw, 32px); }
+.case-body { display: grid; gap: 14px; align-content: center; padding: clamp(22px, 2.6vw, 32px); }
 .case-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .case h3 { font-size: clamp(30px, 3.2vw, 42px); letter-spacing: -.045em; line-height: 1; }
 .case h3 i { font-style: normal; color: var(--brand); }
@@ -199,15 +208,16 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
 }
 @media (max-width: 900px) {
   .hero-text { grid-column: 1 / -1; padding-right: 0; }
-  .photo { grid-column: 1 / -1; min-height: 0; aspect-ratio: 4 / 5; max-height: 640px; }
+  .photo { grid-column: 1 / -1; order: -1; justify-self: start; width: 240px; max-width: none; border-radius: 28px; }
   .s5, .s6, .s7 { grid-column: span 12; }
-  .case { grid-column: span 12; }
+  .case { grid-template-columns: 1fr; }
+  .case-stage { order: 0; margin: 10px 10px 0; }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .head > .label, .head > :last-child { grid-column: 1 / -1; }
   .head > .label { padding-top: 0; }
-  .photo { aspect-ratio: 4 / 4.6; }
+  .photo { width: 180px; }
   .job { grid-template-columns: 1fr; gap: 4px; }
   .hero .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .hero .actions .btn { padding: 18px 12px; font-size: 16px; white-space: nowrap; }
@@ -220,20 +230,17 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
   .job .when { padding-top: 0; }
   .job p { display: none; }
   .job { padding: 14px 0; }
-  .swipe { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--gap); margin: 0 calc(-1 * var(--gutter)); padding: 2px var(--gutter) 8px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
-  .swipe::-webkit-scrollbar { display: none; }
-  .swipe > .case { flex: 0 0 88%; scroll-snap-align: start; }
   .case-stage { height: 300px; }
   .soon { flex-direction: column; align-items: flex-start; }
   .lang button { padding: 8px 12px; }
-  .swipe-hint { display: inline-flex !important; }
 }
-.swipe-hint { display: none; font: 500 12.5px/1 var(--mono); color: var(--muted); margin-top: 14px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rv { opacity: 1; transform: none; transition: none; }
   .pill .live::after { animation: none; }
   .case, .ph, .go, .photo img, .btn { transition: none; }
+  .in-up, .photo.in-pop { opacity: 1; transform: none; animation: none; }
+  .tw-cursor { animation: none; }
 }
 </style>
 </head>
@@ -260,20 +267,21 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
     <div class="wrap hero-grid">
       <div class="hero-text">
         <div>
-          <span class="pill"><span class="live" aria-hidden="true"></span><span class="ru">UX/UI-дизайнер · Алматы</span><span class="en">UX/UI designer · Almaty</span></span>
-          <h1><span class="hello"><span class="ru">Привет, я</span><span class="en">Hi, I'm</span></span><span class="ru"><span class="first"><span class="bigdot" aria-hidden="true"></span>Дана</span><br><span class="last">Орынбетова</span></span><span class="en"><span class="first"><span class="bigdot" aria-hidden="true"></span>Dana</span><br><span class="last">Orynbetova</span></span></h1>
-          <p class="lead"><span class="ru">Проектирую мобильные приложения и сайты, которыми пользуются в реальной жизни: от исследований и сценариев до дизайн-системы и контроля вёрстки. Люблю продукты, где интерфейс решает настоящую задачу бизнеса.</span><span class="en">I design mobile apps and websites people use in real life, from research and flows to design systems and build review. I like products where the interface solves a real business problem.</span></p>
-          <div class="actions">
+          <span class="pill in-up" style="--d:.05s"><span class="live" aria-hidden="true"></span><span class="ru">UX/UI-дизайнер · Алматы</span><span class="en">UX/UI designer · Almaty</span></span>
+          <h1 class="in-up" style="--d:.15s"><span class="hello"><span class="ru">Привет, я</span><span class="en">Hi, I'm</span></span><span class="ru"><span class="first"><span class="bigdot" aria-hidden="true"></span>Дана</span><br><span class="last">Орынбетова</span></span><span class="en"><span class="first"><span class="bigdot" aria-hidden="true"></span>Dana</span><br><span class="last">Orynbetova</span></span></h1>
+          <p class="typed in-up" style="--d:.3s" aria-label="Исследую, проектирую, тестирую, собираю дизайн-системы"><span class="tw-word"></span><span class="tw-cursor" aria-hidden="true"></span></p>
+          <p class="lead in-up" style="--d:.4s"><span class="ru">Проектирую мобильные приложения и сайты, которыми пользуются в реальной жизни: от исследований и сценариев до дизайн-системы и контроля вёрстки. Люблю продукты, где интерфейс решает настоящую задачу бизнеса.</span><span class="en">I design mobile apps and websites people use in real life, from research and flows to design systems and build review. I like products where the interface solves a real business problem.</span></p>
+          <div class="actions in-up" style="--d:.5s">
             <a class="btn solid" href="#cases"><span class="ru">Смотреть кейсы</span><span class="en">See case studies</span> <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <a class="btn ghost" href="https://t.me/orynbetova" target="_blank" rel="noopener">Telegram</a>
           </div>
         </div>
-        <dl class="facts">
+        <dl class="facts in-up" style="--d:.6s">
           <div><dt><span class="ru">Опыт</span><span class="en">Experience</span></dt><dd><span class="ru">4+ года в UX/UI и в веб-дизайне</span><span class="en">4+ years in UX/UI and web design</span></dd></div>
           <div><dt><span class="ru">Фокус</span><span class="en">Focus</span></dt><dd><span class="ru">Моб. приложения, B2B и B2C</span><span class="en">Mobile apps, B2B and B2C</span></dd></div>
         </dl>
       </div>
-      <figure class="photo">
+      <figure class="photo in-pop">
         <img src="img/dana.webp" width="1200" height="1600" data-alt-ru="Дана Орынбетова" data-alt-en="Dana Orynbetova" alt="Дана Орынбетова" fetchpriority="high">
       </figure>
     </div>
@@ -337,7 +345,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
         <span class="label">02 <span class="dot"></span> <span class="ru">Кейсы</span><span class="en">Case studies</span></span>
         <div><h2><span class="ru">Продукты, которые уже работают</span><span class="en">Products already in use</span></h2><p class="ru">Оба приложения запущены в App Store и Google Play. В кейсах: исследование, решения и цифры после запуска.</p><p class="en">Both apps are live on the App Store and Google Play. Each case covers research, decisions and post-launch numbers.</p></div>
       </div>
-      <div class="cases swipe">
+      <div class="cases">
         <a class="case joozim" href="joozim/">
           <div class="case-stage" aria-hidden="true">
             <div class="ph l"><img src="joozim/img/order-manager.webp" alt="" loading="lazy"></div>
@@ -351,7 +359,7 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
             <p class="en">A B2B wholesale marketplace for stores. Multi-role ordering, an app for sales reps and retention mechanics.</p>
             <div class="meta"><span class="ru">Маркетплейс</span><span class="en">Marketplace</span><span>iOS · Android</span><span class="ru">Несколько ролей</span><span class="en">Multi-role</span></div>
             <div class="case-foot">
-              <div><b>414</b><small><span class="ru">заказов · 310 магазинов</span><span class="en">orders · 310 stores</span></small></div>
+              <div><b data-count="414">414</b><small><span class="ru">заказов · 310 магазинов</span><span class="en">orders · 310 stores</span></small></div>
               <span class="go" aria-hidden="true">→</span>
             </div>
           </div>
@@ -369,13 +377,12 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
             <p class="en">Booking glamping, cabins and experiences across Kazakhstan. Tickets work offline, and a controller mode serves guests without the app.</p>
             <div class="meta"><span class="ru">Путешествия</span><span class="en">Travel</span><span>iOS · Android</span><span class="ru">Офлайн</span><span class="en">Offline</span></div>
             <div class="case-foot">
-              <div><b>~300</b><small><span class="ru">операций за первый месяц</span><span class="en">transactions in the first month</span></small></div>
+              <div><b data-count="300" data-prefix="~">~300</b><small><span class="ru">операций за первый месяц</span><span class="en">transactions in the first month</span></small></div>
               <span class="go" aria-hidden="true">→</span>
             </div>
           </div>
         </a>
       </div>
-      <span class="swipe-hint" aria-hidden="true"><span class="ru">листайте →</span><span class="en">swipe →</span></span>
       <div class="cases" style="margin-top: var(--gap)">
         <div class="soon"><span><span class="ru">Новые кейсы скоро появятся</span><span class="en">More case studies coming soon</span></span><span class="label">03 · …</span></div>
       </div>
@@ -434,6 +441,38 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
     });
   });
   apply(initial());
+
+
+  /* typewriter */
+  var words = {
+    ru: ["Исследую.", "Проектирую.", "Тестирую.", "Собираю дизайн-системы.", "Довожу до релиза."],
+    en: ["Research.", "Design.", "Test.", "Build design systems.", "Ship to release."]
+  };
+  var tw = document.querySelector(".tw-word");
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (tw) {
+    var wi = 0, ci = 0, del = false;
+    (function tick() {
+      var l = root.getAttribute("data-lang") || "ru", list = words[l], w = list[wi % list.length];
+      if (reduce) { tw.textContent = list.join(" "); return; }
+      if (!del) { ci++; tw.textContent = w.slice(0, ci); if (ci >= w.length) { del = true; return setTimeout(tick, 1600); } return setTimeout(tick, 70); }
+      ci--; tw.textContent = w.slice(0, ci);
+      if (ci <= 0) { del = false; wi++; return setTimeout(tick, 350); }
+      setTimeout(tick, 35);
+    })();
+  }
+
+  /* number counters */
+  var nums = document.querySelectorAll("[data-count]");
+  function run(el) {
+    var to = +el.getAttribute("data-count"), pre = el.getAttribute("data-prefix") || "", t0 = null, dur = 1100;
+    function step(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3); el.textContent = pre + Math.round(to * e); if (p < 1) requestAnimationFrame(step); }
+    el.textContent = pre + "0"; requestAnimationFrame(step);
+  }
+  if ("IntersectionObserver" in window && !reduce) {
+    var co = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { run(e.target); co.unobserve(e.target); } }); }, { threshold: .6 });
+    nums.forEach(function (n) { n.textContent = (n.getAttribute("data-prefix") || "") + "0"; co.observe(n); });
+  }
 
   /* reveal on scroll */
   var items = document.querySelectorAll(".rv");
