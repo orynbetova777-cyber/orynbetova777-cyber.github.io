@@ -63,6 +63,7 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
 .dot.joozim { background: var(--joozim); }
 .dot.qt { background: var(--qt); }
 .dot.pmu { background: var(--pmu); }
+.dot.zl { background: #058D4E; }
 
 /* header */
 .top { position: sticky; top: 0; z-index: 30; background: rgb(243 243 245 / .78); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid rgb(19 19 23 / .06); }
@@ -188,6 +189,7 @@ section.block { padding: clamp(72px, 9vw, 128px) 0 0; scroll-margin-top: 70px; }
 .case.joozim { --glow: rgb(255 184 0 / .55); --brand: var(--joozim); }
 .case.qt { --glow: rgb(230 74 52 / .4); --brand: var(--qt); }
 .case.pmu { --glow: rgb(130 112 99 / .45); --brand: var(--pmu); }
+.case.zl { --glow: rgb(5 141 78 / .4); --brand: #058D4E; }
 .win { position: absolute; left: 7%; right: 16%; top: 13%; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 24px 50px -24px rgb(19 19 23 / .45), 0 0 0 1px rgb(19 19 23 / .06); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
 .win .wbar { display: flex; gap: 5px; align-items: center; height: 22px; padding: 0 10px; background: #F6F4F1; border-bottom: 1px solid #ECE8E3; }
 .win .wbar i { width: 7px; height: 7px; border-radius: 50%; background: #D9D3CC; }
@@ -434,9 +436,26 @@ footer .who { display: inline-flex; align-items: center; gap: 8px; }
             </div>
           </div>
         </a>
+        <a class="case zl" href="zeinet-life/">
+          <div class="case-stage" aria-hidden="true">
+            <div class="win"><div class="wbar"><i></i><i></i><i></i></div><img src="zeinet-life/img/card-desk.webp" alt="" loading="lazy"></div>
+            <div class="ph r web"><img src="zeinet-life/img/card-mob.webp" alt="" loading="lazy"></div>
+          </div>
+          <div class="case-body">
+            <div class="case-top"><span class="label row"><span class="dot zl"></span>04 · Web</span></div>
+            <h3>Zeinet Life<i>.</i></h3>
+            <p class="ru">Редизайн сайта о&nbsp;пенсионном аннуитете для аудитории 55–60+. Спокойная современная главная: крупный текст, сравнение вместо абзацев и&nbsp;две понятные кнопки.</p>
+            <p class="en">A redesign of a pension annuity website for a 55–60+ audience. A calm, modern home page: large type, comparison instead of paragraphs and two clear buttons.</p>
+            <div class="meta"><span class="ru">Редизайн</span><span class="en">Redesign</span><span>Desktop · Mobile</span><span>Fintech</span></div>
+            <div class="case-foot">
+              <div><b data-count="9">9</b><small><span class="ru">блоков главной</span><span class="en">home page blocks</span></small></div>
+              <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
       </div>
       <div class="cases" style="margin-top: var(--gap)">
-        <div class="soon"><span><span class="ru">Новые кейсы скоро появятся</span><span class="en">More case studies coming soon</span></span><span class="label">04 · …</span></div>
+        <div class="soon"><span><span class="ru">Новые кейсы скоро появятся</span><span class="en">More case studies coming soon</span></span><span class="label">05 · …</span></div>
       </div>
     </div>
   </section>
