@@ -1027,6 +1027,38 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
 #context .compare .tag.b { background: #F1F1F0; color: var(--grey); }
 #context .compare .tag.a { background: #0F0F0F; color: #fff; }
 @media (max-width: 600px) { #context .compare { padding-top: 48px; } #context .compare .divider { top: 48px; } #context .compare .knob { top: calc(50% + 24px); } #context .compare .tag { top: 10px; } }
+
+/* ===== round 9: calm motion + mobile fixes ===== */
+/* 6 no jumping: fade only, no hover lifts, no floating */
+.rv { transform: none !important; transition: opacity .7s ease; }
+.btn:hover, .fear:hover, .pstep:hover, .sn:hover, .fc:hover, .ct:hover .ui-panel, .story:hover .st-card, .case:hover { transform: none !important; }
+.ct:hover .ui-panel { transform: rotate(-2deg) !important; }
+.cur { animation: none; }
+.spark { animation: none; }
+/* 3 spark above text, on grid */
+.st-row { display: block; }
+.spark { width: clamp(72px, 7vw, 104px); margin-bottom: clamp(20px, 2.4vw, 32px); }
+/* 4 video tabs on the grid, no badge */
+.vid-wrap .vid-ui { left: max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter))); right: max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter))); padding: clamp(14px, 2vw, 24px) 0; }
+.vid-badge { display: none; }
+/* 5 Montserrat fits the grid */
+.th-word { font-size: min(15.5vw, 220px); max-width: 100%; }
+@media (max-width: 600px) {
+  .cover { aspect-ratio: 1 / 1; }
+  .cover img { object-position: 50% 40%; transform: none; animation: none; }
+  #context .disp, #portfolio .disp { white-space: nowrap; font-size: clamp(26px, 8.4vw, 36px); }
+  .vid-wrap { height: auto; aspect-ratio: 2 / 1; }
+  .vid-wrap .vid-ui { padding: 10px 0; }
+  .tabs { padding: 3px; gap: 2px; }
+  .tabs button { padding: 8px 12px; font-size: 11.5px; }
+  .th-word { font-size: calc((100vw - 2 * var(--gutter)) / 5.15); }
+  .spark { width: 64px; margin: 0 0 18px; }
+}
+.spark { justify-self: start !important; margin-top: 0 !important; }
+.st-row { margin-top: clamp(80px, 10vw, 150px); }
+.st-row .statement { padding: 0; }
+.vid-wrap { height: auto; aspect-ratio: 1600 / 680; max-height: 82vh; }
+@media (max-width: 600px) { .vid-wrap { aspect-ratio: 2 / 1; } }
 </style>
 </head>
 <body>
@@ -1152,8 +1184,8 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
         </div>
       </div>
       <div class="st-row">
-        <p class="statement rv"><span class="w"><span class="ru">Клиентку останавливает не цена, а страх неестественного результата.</span><span class="en">What stops a client isn’t price, it’s fear of an unnatural result.</span></span> <span class="g"><span class="ru">Поэтому сайт сначала показывает зажившие <span class="pin">работы<em>видео</em></span>, а уже потом цены и запись.</span><span class="en">So the site shows healed <span class="pin">work<em>video</em></span> first, and only then prices and booking.</span></span></p>
         <div class="spark" aria-hidden="true"><svg viewBox="0 0 200 200" width="100%" height="100%"><g class="sp-rot" fill="none" stroke-linecap="round"><g stroke="#827063" stroke-width="30"><path d="M100 100 L100 26"/><path d="M100 100 L164 63"/><path d="M100 100 L164 137"/><path d="M100 100 L100 174"/><path d="M100 100 L36 137"/><path d="M100 100 L36 63"/></g></g><circle cx="88" cy="96" r="5" fill="#fff"/><circle cx="112" cy="96" r="5" fill="#fff"/><path d="M90 112 q10 8 20 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>
+        <p class="statement rv"><span class="w"><span class="ru">Клиентку останавливает не цена, а страх неестественного результата.</span><span class="en">What stops a client isn’t price, it’s fear of an unnatural result.</span></span> <span class="g"><span class="ru">Поэтому сайт сначала показывает зажившие <span class="pin">работы<em>видео</em></span>, а уже потом цены и запись.</span><span class="en">So the site shows healed <span class="pin">work<em>video</em></span> first, and only then prices and booking.</span></span></p>
       </div>
       <div class="fears2">
         <div class="f2-head"><span class="k"><span class="ru">Страхи клиентки</span><span class="en">Client fears</span></span><span class="k"><span class="ru">→ и как сайт отвечает</span><span class="en">→ and how the site answers</span></span></div>
@@ -1197,7 +1229,7 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
         <video class="on" src="img/ba-brows1.mp4" poster="img/ba-brows1.webp" muted loop playsinline preload="metadata" aria-label="До / после: брови"></video>
         <video src="img/ba-lips1.mp4" poster="img/ba-lips1.webp" muted loop playsinline preload="none" aria-label="До / после: губы"></video>
         <video src="img/ba-eyes1.mp4" poster="img/ba-eyes1.webp" muted loop playsinline preload="none" aria-label="До / после: глаза"></video>
-        <div class="vid-ui"><div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-v="0"><span class="ru">Брови</span><span class="en">Brows</span></button><button type="button" role="tab" aria-selected="false" data-v="1"><span class="ru">Губы</span><span class="en">Lips</span></button><button type="button" role="tab" aria-selected="false" data-v="2"><span class="ru">Глаза</span><span class="en">Eyes</span></button></div><span class="vid-badge"><span class="ru">до → после · 5 сек</span><span class="en">before → after · 5 sec</span></span></div>
+        <div class="vid-ui"><div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-v="0"><span class="ru">Брови</span><span class="en">Brows</span></button><button type="button" role="tab" aria-selected="false" data-v="1"><span class="ru">Губы</span><span class="en">Lips</span></button><button type="button" role="tab" aria-selected="false" data-v="2"><span class="ru">Глаза</span><span class="en">Eyes</span></button></div></div>
         <div class="vid-bar"><i></i></div>
       </div>
       <div class="how swipe">
@@ -1415,6 +1447,10 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
     bar.style.setProperty("--p", max > 0 ? Math.min(1, scrollY / max) : 0);
   }
   addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
+
+
+
+
 
 
 
