@@ -1059,6 +1059,10 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
 .st-row .statement { padding: 0; }
 .vid-wrap { height: auto; aspect-ratio: 1600 / 680; max-height: 82vh; }
 @media (max-width: 600px) { .vid-wrap { aspect-ratio: 2 / 1; } }
+/* round 10: no horizontal overflow on iOS */
+html, body { overflow-x: clip; }
+@media (max-width: 600px) { #context .disp, #portfolio .disp { font-size: min(7.4vw, 34px); } }
+.th-word { white-space: nowrap; display: block; width: 100%; }
 </style>
 </head>
 <body>
@@ -1299,6 +1303,7 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
           <span class="k">Montserrat · Raleway Italic</span>
         </div>
         <div class="th-word" id="thWord">Montserrat</div>
+        <script>(function(){var w=document.getElementById('thWord');function fit(){w.style.fontSize='100px';var g=document.createRange();g.selectNodeContents(w);var r=w.clientWidth/g.getBoundingClientRect().width;w.style.fontSize=Math.min(220,Math.floor(100*r*0.98))+'px';}fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);w.addEventListener('transitionend',fit);})();</script>
         <div class="th-ruler" aria-hidden="true"><div class="ticks"></div><div class="nums"><span>96</span><span>72</span><span>52</span><span>36</span><span>24</span><span>18</span><span>14</span><span>12</span><span>0</span></div></div>
       </div>
       <div class="stories-band rv">
@@ -1447,6 +1452,8 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
     bar.style.setProperty("--p", max > 0 ? Math.min(1, scrollY / max) : 0);
   }
   addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
+
+
 
 
 
