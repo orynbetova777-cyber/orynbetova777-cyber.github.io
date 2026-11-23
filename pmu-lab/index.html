@@ -1063,6 +1063,8 @@ section.sec.dark.join { margin-top: 0; padding-top: clamp(70px, 8vw, 120px); }
 html, body { overflow-x: clip; }
 @media (max-width: 600px) { #context .disp, #portfolio .disp { font-size: min(7.4vw, 34px); } }
 .th-word { white-space: nowrap; display: block; width: 100%; }
+@media (max-width: 600px) { #portfolio .disp { white-space: normal; font-size: clamp(26px, 8.4vw, 36px); } }
+.th-word { line-height: .95; }
 </style>
 </head>
 <body>
@@ -1226,7 +1228,7 @@ html, body { overflow-x: clip; }
     <div class="wrap">
       <div class="sec-head">
         <div class="no"><span class="k">04 · <span class="ru">Самое сложное</span><span class="en">The hardest part</span></span><span class="desc"><span class="ru">pmu lab</span><span class="en">pmu lab</span></span></div>
-        <h2 class="disp"><span class="ru">Видео «до / после»</span><span class="en">Before / after video</span></h2>
+        <h2 class="disp"><span class="ru">Видео<br>«до / после»</span><span class="en">Before / after<br>video</span></h2>
         <p class="intro"><span class="ru">Вместо фото разных форматов — короткие видео крупным планом: разница видна за 5–7 секунд.</span><span class="en">Instead of mixed-format photos, short close-up videos: the difference shows in 5–7 seconds.</span></p>
       </div>
       <div class="vid-wrap rv" id="vids">
@@ -1303,7 +1305,7 @@ html, body { overflow-x: clip; }
           <span class="k">Montserrat · Raleway Italic</span>
         </div>
         <div class="th-word" id="thWord">Montserrat</div>
-        <script>(function(){var w=document.getElementById('thWord');function fit(){w.style.fontSize='100px';var g=document.createRange();g.selectNodeContents(w);var r=w.clientWidth/g.getBoundingClientRect().width;w.style.fontSize=Math.min(220,Math.floor(100*r*0.98))+'px';}fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);w.addEventListener('transitionend',fit);})();</script>
+        <script>(function(){var w=document.getElementById('thWord');function fit(){w.style.fontSize='100px';var g=document.createRange();g.selectNodeContents(w);var r=w.clientWidth/g.getBoundingClientRect().width;w.style.fontSize=(100*r*0.995).toFixed(2)+'px';}fit();addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);w.addEventListener('transitionend',fit);})();</script>
         <div class="th-ruler" aria-hidden="true"><div class="ticks"></div><div class="nums"><span>96</span><span>72</span><span>52</span><span>36</span><span>24</span><span>18</span><span>14</span><span>12</span><span>0</span></div></div>
       </div>
       <div class="stories-band rv">
@@ -1452,6 +1454,8 @@ html, body { overflow-x: clip; }
     bar.style.setProperty("--p", max > 0 ? Math.min(1, scrollY / max) : 0);
   }
   addEventListener("scroll", prog, { passive: true }); addEventListener("resize", prog); prog();
+
+
 
 
 
