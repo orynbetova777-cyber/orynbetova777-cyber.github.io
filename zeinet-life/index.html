@@ -607,6 +607,12 @@ html[data-lang="ru"] .en, html[data-lang="en"] .ru { display: none !important; }
   .fcur2 { top: 14px; right: 18%; }
 }
 .q1 { font-size: 9px; letter-spacing: .03em; white-space: nowrap; padding: 5px 4px 0; }
+@media (max-width: 900px) {
+  .kpis { grid-template-columns: 1fr; gap: 10px; }
+  .kpis div { grid-template-columns: 1fr; gap: 8px; padding: 22px 20px; }
+  .kpis b { font-size: clamp(44px, 13vw, 60px); }
+  .kpis span { font-size: 15px; }
+}
 </style>
 </head>
 <body>
